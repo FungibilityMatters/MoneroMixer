@@ -36,25 +36,3 @@ open up a terminal window ever again!
 
 Donate XMR to: `4AmmKxwNxezFuCsNPkujS2SxXqDTuchbE1BzGGMggFCfeGQm9ew2FTjYzVwZvwQhaMGmTAJKUNCc1LboGyVwUb4t1bUpvNn`
 
-
-
-
-
-
-
-
-Note from the developer:
-I made this program with the intention of helping people, it is 100% free to use
-and donations are not required by any means. However, if you're feeling generous, 
-I would greatly appreciate a donation of any amount you're willing to give to help fund this project. 
-
-Your donation would be used to fund: 
-- Integrating additional secure withdrawl methods to support more currencies 
-and allow you to withdraw your XMR balance as.... AMAZON GIFT CARDS and other gift cards! 
-- Building a reliable GUI so you can use MoneroMixer without having to 
-open up a terminal window ever again! 
-
-Donate XMR to: `4AmmKxwNxezFuCsNPkujS2SxXqDTuchbE1BzGGMggFCfeGQm9ew2FTjYzVwZvwQhaMGmTAJKUNCc1LboGyVwUb4t1bUpvNn`
-
-
-
