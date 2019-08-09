@@ -1,4 +1,4 @@
-# MoneroMixer v1.0: The easiest way to use Monero to anonymously exchange and properly mix XMR, BTC, LTC, ETH, BCH, & 100+ other coins on Tails and Whonix.
+# MoneroMixer v1.0: The easiest way to use Monero to anonymously exchange and properly mix XMR, BTC, LTC, ETH, BCH, & 100+ other coins on Tails OS or Whonix.
 
 TO SETUP: 
 1. Right click anywhere on your desktop and select "Open Terminal". This will open a terminal window.
