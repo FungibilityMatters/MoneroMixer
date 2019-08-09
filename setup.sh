@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #DEFAULT SETTINGS:
-daemon="xmrtolujkxnlinre.onion:18081"
+daemon="zdhkwneu7lfaum2p.onion:18099"
 declare -i ringsize
 ringsize=11
 priority="normal"
