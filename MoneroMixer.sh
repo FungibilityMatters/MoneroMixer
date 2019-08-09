@@ -110,7 +110,7 @@ tx_option_selector withdraw withdrawal "Or select XMR to send XMR directly from 
 
 tx_option_selector() {
 get_coins
-coins_choice=$(zenity --list --height=300 --checklist --multiple --separator=" " --title="Select a coin to $1 anonymously" --text="Select coin(s) to view currently available $2 options from non-KYC exchanges.
+coins_choice=$(zenity --list --height=300 --checklist --multiple --separator=" " --title="Select coin(s) to view anonymous $1 options" --text="Select coin(s) to view currently available $2 options from non-KYC exchanges.
  
 $3:" --column="Select coin(s)" --column="Currently Supported Coins:" --column="Name" XMR XMR Monero $coins 2> /dev/null)
 test -z "$coins_choice" && required_error "coin to $1"
