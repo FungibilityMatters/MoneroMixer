@@ -19,29 +19,19 @@ TO RUN AGAIN AFTER YOUR FIRST TIME:
 FAQ:
 
 **What does MoneroMixer do?**
+- Simplifies the process of creating a Monero wallet on Tails and setting it up to work over tor.
+- Allows you to deposit or withdraw XMR, BTC, LTC, ETH and 100+ other coins to or from your wallet via non-KYC exchanges without using Javascript.  
+- Objectively compares exchange rates between non-KYC exchanges to make sure that you always get the most bang for your buck. 
 
--Simplifies the process of creating a Monero wallet on Tails and setting it up to work over tor.
-
--Allows you to deposit or withdraw XMR, BTC, LTC, ETH and 100+ other coins to or from your wallet via non-KYC exchanges without using Javascript.  
-
--Objectively compares exchange rates between non-KYC exchanges to make sure that you always get the most bang for your buck. 
-
-How does MoneroMixer protect my privacy?
-
--Monero: The inherent fungibility and immaculate cryptography of Monero allows your coins to become truly untraceable once you exchange them for XMR through a non-KYC exchange. 
-
+**How does MoneroMixer protect your privacy?**
+- Monero: The inherent fungibility and immaculate cryptography of Monero allows your coins to become truly untraceable once you exchange them for XMR through a non-KYC exchange. 
 - Non-KYC exchanges: Godex.io, MorphToken and XMR.to all do not have know your customer (KYC) policies, meaning that you are able to exchange without giving any personal information whatsoever. 
-
--Torsocks: Forces all network connections used by your Monero wallet and the Python script that facilitates the exchanges to be routed only through the tor network . This prevents IP and DNS leaks so your real IP address is never associated with your wallet or any exchange orders you create.  
-
--NO JavaScript: Preventing you from being vulnerable to the many known JavaScript security vulnerabilities such as XSS, CSRF, clickjacking etc.
-
-NO Browser: Preventing you from being vulnerable to potentially undiscovered security vulnerabilities in the Tor Browser such as the recent Sandbox Escape. 
-
--Encryption and shredding: All sensitive data used or created by MoneroMixer is stored in AES 256-bit encrypted files that are only decrypted when read, then immediately re-encrypted. All files that are no longer needed are immediately shredded (Deleted so they cannot be recovered).     
+- Torsocks: Forces all network connections used by your Monero wallet and the Python script that facilitates the exchanges to be routed only through the tor network . This prevents IP and DNS leaks so your real IP address is never associated with your wallet or any exchange orders you create.  
+- NO JavaScript: Preventing you from being vulnerable to the many known JavaScript security vulnerabilities such as XSS, CSRF, clickjacking etc.
+- NO Browser: Preventing you from being vulnerable to potentially undiscovered security vulnerabilities in the Tor Browser such as the recent Sandbox Escape. 
+- Encryption and shredding: All sensitive data used or created by MoneroMixer is stored in AES 256-bit encrypted files that are only decrypted when read, then immediately re-encrypted. All files that are no longer needed are immediately shredded (Deleted so they cannot be recovered).     
 
 **How do I send, receive, or mix my coins anonymously?**
-
 Deposit: 
 1. Select coins and enter an estimated deposit amount to compare deposit options.  
 2. Choose a coin and exchange to deposit with from the list.
