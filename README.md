@@ -32,6 +32,7 @@ FAQ:
 - Encryption and shredding: All sensitive data used or created by MoneroMixer is stored in AES 256-bit encrypted files that are only decrypted when read, then immediately re-encrypted. All files that are no longer needed are immediately shredded (Deleted so they cannot be recovered).     
 
 **How do I send, receive, or mix my coins anonymously?**
+
 Deposit: 
 1. Select coins and enter an estimated deposit amount to compare deposit options.  
 2. Choose a coin and exchange to deposit with from the list.
