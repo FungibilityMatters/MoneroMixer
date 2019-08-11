@@ -15,9 +15,10 @@ TO RUN AGAIN AFTER YOUR FIRST TIME:
 2. Right click and select "Open in terminal"
 3. Type `./start` then press ENTER.
 
+
 FAQ:
 
-What does MoneroMixer do?
+**What does MoneroMixer do?**
 
 -Simplifies the process of creating a Monero wallet on Tails and setting it up to work over tor.
 
@@ -39,8 +40,7 @@ NO Browser: Preventing you from being vulnerable to potentially undiscovered sec
 
 -Encryption and shredding: All sensitive data used or created by MoneroMixer is stored in AES 256-bit encrypted files that are only decrypted when read, then immediately re-encrypted. All files that are no longer needed are immediately shredded (Deleted so they cannot be recovered).     
 
-
-How do I send, receive, or mix my coins anonymously?
+**How do I send, receive, or mix my coins anonymously?**
 
 Deposit: 
 1. Select coins and enter an estimated deposit amount to compare deposit options.  
