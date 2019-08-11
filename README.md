@@ -16,12 +16,15 @@ TO RUN AGAIN AFTER YOUR FIRST TIME:
 3. Type `./start` then press ENTER.
 
 FAQ:
+
 What does MoneroMixer do?
+
 -Simplifies the process of creating a Monero wallet on Tails and setting it up to work over tor.
 -Allows you to deposit or withdraw XMR, BTC, LTC, ETH and 100+ other coins to or from your wallet via non-KYC exchanges without using Javascript.  
 -Objectively compares exchange rates between non-KYC exchanges to make sure that you always get the most bang for your buck. 
 
 How does MoneroMixer protect my privacy?
+
 -Monero: The inherent fungibility and immaculate cryptography of Monero allows your coins to become truly untraceable once you exchange them for XMR through a non-KYC exchange. 
 - Non-KYC exchanges: Godex.io, MorphToken and XMR.to all do not have know your customer (KYC) policies, meaning that you are able to exchange without giving any personal information whatsoever. 
 -Torsocks: Forces all network connections used by your Monero wallet and the Python script that facilitates the exchanges to be routed only through the tor network . This prevents IP and DNS leaks so your real IP address is never associated with your wallet or any exchange orders you create.  
@@ -31,6 +34,7 @@ NO Browser: Preventing you from being vulnerable to potentially undiscovered sec
 
 
 How do I send, receive, or mix my coins anonymously?
+
 Deposit: 
 1. Select coins and enter an estimated deposit amount to compare deposit options.  
 2. Choose a coin and exchange to deposit with from the list.
@@ -45,6 +49,7 @@ Withdraw:
 2. Choose a coin and exchange to withdraw with from the list.
 3. Enter a destination address and amount in the coin indicated.
 4. Confirm the withdrawal then your XMR will be sent to the exchange you selected, and the exchange will send the coin you selected to the destination address you entered. 
+
 
 Note from the developer:
 I made this program with the intention of helping people, it is 100% free to use
