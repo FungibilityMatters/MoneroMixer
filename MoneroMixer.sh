@@ -1478,7 +1478,7 @@ read -r choice
 }
 
 donate_thotbot() {
-devaddress="notyetknown"
+devaddress="4BD16rh8ww6Etf7VzzmkzCiWsNUJy99ifAi7cKkzHvMyDQtzYnmwwDgKLKrPz4gpzmZ28YNtJTwM9jkfUgVyMQQe1zZDpPe"
 dev="Thotbot" 
 title
 echo -e "${YAY}Thank you for considering donating a small amount of ${YAY}XMR to Thotbot!
