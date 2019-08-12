@@ -198,29 +198,38 @@ ${GRN}Success! You are done setting up $MoneroMixer ${GRN}and are ready to creat
 echo -e "${WBU}Use responsibly. ${STD}" && sleep 3
 }
 
+download_monero_wallet_cli(){
+mkdir Monero-Software
+cd Monero-Software
+torsocks wget https://dlsrc.getmonero.org/cli/monero-linux-x64-v0.14.1.2.tar.bz2 | $(zenity --progress --title="Downloading Monero software from getmonero.org" --text="Downloading Linux64 Monero wallet command line tools from getmonero.org
+
+Please wait. MoneroMixer will start automatically once finished..." --pulsate --auto-close --auto-kill 2> /dev/null)
+tar -xzf monero-linux-x64-v0.14.1.2.tar.bz2
+mv monero-x86_64-linux-gnu/monero-wallet-cli monero-wallet-cli
+chmod +x monero-wallet-cli
+cd ../
+}
+
 
 file_setup() {
-tar -xzf monero-wallet-cli.tar.gz monero-wallet-cli && rm -rf monero-wallet-cli.tar.gz
-chmod +x MoneroMixer.sh
-chmod +x monero-wallet-cli
-chmod +x start
-
-mkdir Scripts Monero-Software Info    
+mkdir Scripts Info    
 mv MoneroMixer.py Scripts/MoneroMixer.py 
 mv MoneroMixer.sh Scripts/MoneroMixer.sh
 mv setup.sh Scripts/setup.sh
-mv monero-wallet-cli Monero-Software/monero-wallet-cli
-    #mv LICENSE Info/LISCENSE.txt 
+#mv LICENSE Info/LISCENSE.txt 
 mv README.md Info/README.md
+
+chmod +x Scripts/MoneroMixer.sh
+chmod +x start
 }
 
 auto_setup() {
-test -e monero-wallet-cli.tar.gz && file_setup
+test -e Scripts || file_setup
 write_settings
 }
 
 manual_setup() {
-test -e monero-wallet-cli.tar.gz && file_setup
+test -e Scripts || file_setup
 set_fiat
 set_daemon
 set_priority
@@ -228,5 +237,14 @@ set_priority
 write_settings
 }
 
-test -z "$1" && description && setup_choice && ./Scripts/MoneroMixer.sh
-test -z "$1" || $1 && write_settings && cd ../ && ./Scripts/MoneroMixer.sh
+
+if test -z "$1"; then 
+    download_monero_wallet_cli
+    description
+    setup_choice
+else 
+    $1
+    write_settings
+    cd ../
+fi
+./Scripts/MoneroMixer.sh
