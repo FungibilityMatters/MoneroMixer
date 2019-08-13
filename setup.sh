@@ -201,10 +201,10 @@ echo -e "${WBU}Use responsibly. ${STD}" && sleep 3
 download_monero_wallet_cli(){
 mkdir Monero-Software
 cd Monero-Software
-torsocks wget https://dlsrc.getmonero.org/cli/monero-linux-x64-v0.14.1.2.tar.bz2 | $(zenity --progress --title="Downloading Monero software from getmonero.org" --text="Downloading Linux64 Monero wallet command line tools from getmonero.org
+torsocks wget https://downloads.getmonero.org/cli/linux64 | $(zenity --progress --title="Downloading Monero software from getmonero.org" --text="Downloading Linux64 Monero wallet command line tools from getmonero.org
 
 Please wait. MoneroMixer will start automatically once finished..." --pulsate --auto-close --auto-kill 2> /dev/null)
-tar -xzf monero-linux-x64-v0.14.1.2.tar.bz2
+tar -xzf linux64
 mv monero-x86_64-linux-gnu/monero-wallet-cli monero-wallet-cli
 chmod +x monero-wallet-cli
 cd ../
