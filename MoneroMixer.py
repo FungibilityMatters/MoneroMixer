@@ -436,12 +436,9 @@ def create_transaction(
         if coin_in == "XMR":
             withdrawal_extra_id = extra_id
             return_extra_id = None
-            affiliate_id = "finthmQa4L6owSTm"
-
         else:
             withdrawal_extra_id = None
             return_extra_id = extra_id
-            affiliate_id = "27TNjGwqdkmiejKo"
 
         json_data = {
             "coin_from": coin_in,
@@ -451,7 +448,7 @@ def create_transaction(
             "withdrawal_extra_id": withdrawal_extra_id,
             "return": refund_address,
             "return_extra_id": return_extra_id,
-            "affiliate_id": affiliate_id,
+            "affiliate_id": "DObYfBjJxbebSF2H",
         }
 
         id_key = "transaction_id"
