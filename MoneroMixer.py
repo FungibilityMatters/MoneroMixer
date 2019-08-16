@@ -9,7 +9,8 @@ from time import time
 from concurrent.futures import ThreadPoolExecutor
 from sys import argv
 
-HEADERS = {"Accept": "application/json", "Content-Type": "application/json"}
+HEADERS = {"Accept": "application/json", "Content-Type": "application/json",
+"User-Agent" : "Mozilla/5.0 (Windows NT 6.1; rv:60.0) Gecko/20100101 Firefox/60.0"}
 
 # WALLET HELPER FUNCTIONS
 def get_balance(index):
