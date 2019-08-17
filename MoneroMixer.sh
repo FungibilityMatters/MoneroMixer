@@ -114,7 +114,7 @@ coins_choice=$(zenity --list --height=300 --checklist --multiple --separator=" "
  
 $3:" --column="Select coin(s)" --column="Currently Supported Coins:" --column="Name" XMR XMR Monero $coins 2> /dev/null)
 test -z "$coins_choice" && required_error "coin to $1"
-if ! test "$coins_choice" = "XMR"; then
+if ! test "$coins_choice" = "XMR TRUE"; then
     comp_amount=$(zenity --entry --width=300 --title="Enter an estimated $2 amount for rate comparison." --text="Enter the amount you plan to deposit in $fiat, XMR, or any coin 
 you selected, to view currently available $2 options for this amount.
  
@@ -899,7 +899,8 @@ then
     unset -v coin_amount dest_address && wallet_withdraw_confirmed
 else
     unset -v coin_amount dest_address xmr_amount xmr_address && test -e d && shred -u d && $previous_menu || $previous_menu
-fi 
+fi
+$previous_menu 
 }
 
 wallet_withdraw_confirmed() {
