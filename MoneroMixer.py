@@ -1072,7 +1072,8 @@ def get_coins(args):
     for ticker in tickerList:
         if args.out == "checklist":
             coins += "{} {} {} ".format(
-                ticker, ticker, coinDict[ticker].replace(" ", "-").replace("---", "-")
+                ticker if ticker != "TRUE" else "TRUE_C", 
+                ticker, coinDict[ticker].replace(" ", "-").replace("---", "-")
             )
         else:
             coins += "{} {} ".format(
@@ -1394,6 +1395,10 @@ def calc_rates(args):
 
     elif "XMR" in coinsList:
         coinsList.remove("XMR")
+
+    elif "TRUE_C" in coinsList:
+        coinsList.remove("TRUE_C") 
+        coinsList.append("TRUE")
 
     if args.type == "withdraw":
         is_withdrawal = True
