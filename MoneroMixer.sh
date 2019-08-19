@@ -114,7 +114,7 @@ coins_choice=$(zenity --list --height=300 --checklist --multiple --separator=" "
  
 $3:" --column="Select coin(s)" --column="Currently Supported Coins:" --column="Name" XMR XMR Monero $coins 2> /dev/null)
 test -z "$coins_choice" && required_error "coin to $1"
-if ! test "$coins_choice" = "XMR TRUE"; then
+if ! test "$coins_choice" = "XMR"; then
     comp_amount=$(zenity --entry --width=300 --title="Enter an estimated $2 amount for rate comparison." --text="Enter the amount you plan to deposit in $fiat, XMR, or any coin 
 you selected, to view currently available $2 options for this amount.
  
@@ -265,16 +265,17 @@ echo -e "	(${YAY}3${WSTD}) ${STD}Change Transaction Priority Level${WSTD}
 echo -e "	${WSTD}Utilities:"
 echo -e "	(${YAY}4${WSTD}) ${STD}Decrypt Wallet Seed${WSTD}"
 echo -e "	(${YAY}5${WSTD}) ${STD}Decrypt Deposit IDs${WSTD}"
-echo -e "	(${YAY}6${WSTD}) ${STD}Decrypt Withdrawal IDs${WSTD}
+echo -e "	(${YAY}6${WSTD}) ${STD}Decrypt Withdrawal IDs${WSTD}"
+echo -e "	(${YAY}7${WSTD}) ${STD}Enter Monero Wallet CLI (Advanced)${WSTD}
 "
- echo -e "	(${YAY}7${WSTD}) ${STD}Return to Main Menu${STD}" 
+ echo -e "	(${YAY}8${WSTD}) ${STD}Return to Main Menu${STD}" 
 settings_menu_options
 }
 
 settings_menu_options() {
 local choice
 echo -n -e "
-            Enter ${WSTD}choice${STD} [${YAY}1${STD} - ${YAY}7${STD}]:${YAY} "
+            Enter ${WSTD}choice${STD} [${YAY}1${STD} - ${YAY}8${STD}]:${YAY} "
 read -r choice
 	case $choice in
         1) export_settings && ../Scripts/setup.sh set_fiat;;
@@ -284,7 +285,8 @@ read -r choice
         4) decrypt_view_seed ;;
 		5) decrypt_view_depositIDs ;;
 		6) decrypt_view_withdrawalIDs ;;
-		7) main_menu ;;
+        7) wallet_cli ;;
+		8) main_menu ;;
 		*) printf "             ${ERR}Invalid Choice...${STD}" && sleep 2 && $previous_menu
 	esac
 }
