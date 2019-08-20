@@ -1561,8 +1561,8 @@ wallet_error_check
 
 echo -e "Sending your leftover ${YAY}XMR${STD} to ${WSTD}$dev...
 "
-echo -n "${password}
-y
+#echo -n "${password}
+echo -n "y
 " | torsocks ../../Monero-Software/monero-wallet-cli --no-dns --daemon-address $daemon --wallet-file $name --password $password --command sweep_all unimportant $devaddress > wallet-cli-out
 wallet_error_check
 
