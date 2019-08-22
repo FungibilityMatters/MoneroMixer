@@ -246,9 +246,14 @@ if test -z "$1"; then
     download_monero_wallet_cli
     description
     setup_choice
+    ./Scripts/MoneroMixer.sh
+elif test "$1" = "update"; then 
+    download_python_dependencies
+    download_monero_wallet_cli
+    file_setup
 else 
     $1
     write_settings
     cd ../
+    ./Scripts/MoneroMixer.sh
 fi
-./Scripts/MoneroMixer.sh
