@@ -1,20 +1,22 @@
 # MoneroMixer v1.0: The easiest way to use Monero to anonymously exchange and properly mix XMR, BTC, LTC, ETH, BCH, & 100+ other coins on Tails OS or Whonix.
 
 TO SETUP: 
-1. Right click anywhere on your desktop and select "Open Terminal". This will open a terminal window.
+1. Right click anywhere on your desktop. Select "Open Terminal" on Tails or Ubuntu or "Applications" > "Terminal Emulator" on Whonix. This will open a terminal window. 
 2. Copy and paste then line below in its entirety into the terminal window then press ENTER.
 
-`cd "$(zenity --file-selection --title="Select folder where you would like to install MoneroMixer" --directory 2> /dev/null)" && torsocks git clone https://github.com/FungibilityMatters/MoneroMixer | $(zenity --progress --title="Downloading MoneroMixer" --text="Please wait. MoneroMixer will start automatically once finished..." --pulsate --auto-close --auto-kill 2> /dev/null)  && cd MoneroMixer && chmod +x setup.sh && ./setup.sh`
+`cd "$(zenity --file-selection --title="Select folder where you would like to install MoneroMixer" --directory 2> /dev/null)" && (test $USER = "amnesia" || sudo -p "
+Enter password for $USER to begin downloading MoneroMixer: " apt update 2> /dev/null) && ((test $USER = "amnesia" || sudo apt -y install git zenity python3-pip tor 2> /dev/null) && torsocks git clone https://github.com/FungibilityMatters/MoneroMixer) | (zenity --progress --title="Downloading MoneroMixer" --text="Please wait. MoneroMixer will start automatically once finished..." --pulsate --auto-close --auto-kill 2> /dev/null) && cd MoneroMixer && chmod +x setup.sh && ./setup.sh`
 
-3. Select the location you would like to install MoneroMixer. In the terminal window you will see that it has begun downloading. MoneroMixer will start automatically once the download is complete.
- 
-That's it now just follow the prompts within the program and your Monero Wallet will be generated for you. You will be asked for a name and password for your wallet. 
+3. Select the location when you would like to install MoneroMixer, then click "Ok".
+4. If you are NOT using Tails, you will be asked for your password before the download begins. (Tails users can ignore this step)
+In the terminal window you will see that MoneroMixer has begun downloading. MoneroMixer will start automatically once the download is complete. 
+
+Now all you have to do is follow the prompts within the program and your Monero Wallet will be generated for you. You will be asked for a name and password for your new wallet. 
 
 TO RUN AGAIN AFTER YOUR FIRST TIME: 
 1. Open the folder called "MoneroMixer" 
 2. Right click and select "Open in terminal"
 3. Type `./start` then press ENTER.
-
 
 FAQ:
 
