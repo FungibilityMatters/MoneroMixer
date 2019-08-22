@@ -670,7 +670,7 @@ test -d $name || mkdir $name
 cd $name || clean_all_exit
 test -e ../settings && mv ../settings settings
 test -e settings && read_settings
-test -e settings || ../../Scripts/setup.sh    
+test -e settings || ../../Scripts/setup.sh anotha_one   
 
 pw_error_check
 test -e "${name}.keys" || gen_wallet_and_seed_file
@@ -1378,12 +1378,12 @@ do
 done
 mv MoneroMixer old_MoneroMixer 
 (test $USER = "amnesia" || sudo -p " Enter password for $USER to begin downloading MoneroMixer: " apt update 2> /dev/null)
-((test $USER = "amnesia" || sudo apt -y install git zenity python3-pip tor 2> /dev/null) && torsocks git clone https://github.com/FungibilityMatters/MoneroMixer) | (zenity --progress --title="Updating MoneroMixer" --text="Please wait. MoneroMixer will start automatically once finished..." --pulsate --auto-close --auto-kill 2> /dev/null) 
-chmod +x MoneroMixer/setup.sh && ./MoneroMixer/setup.sh update
-mv old_MoneroMixer/Wallets MoneroMixer/Wallets
-rm -rf old_MoneroMixer
-cd MoneroMixer
-./start 
+((test $USER = "amnesia" || sudo apt -y install git zenity python3-pip tor 2> /dev/null) && torsocks git clone https://github.com/FungibilityMatters/MoneroMixer) | (zenity --progress --title="Updating MoneroMixer" --text="Please wait. MoneroMixer will start automatically once finished..." --pulsate --auto-close --auto-kill 2> /dev/null)
+cd MoneroMixer 
+chmod +x setup.sh && setup.sh update
+mv ../old_MoneroMixer/Wallets Wallets
+rm -rf ../old_MoneroMixer
+chmod +x start && ./start 
 }
 
 #HELP FUNCTIONS:
