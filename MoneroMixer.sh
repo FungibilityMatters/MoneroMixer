@@ -263,30 +263,31 @@ echo -e "	(${YAY}2${WSTD}) ${STD}Change Monero Daemon-Address${WSTD}"
 echo -e "	(${YAY}3${WSTD}) ${STD}Change Transaction Priority Level${WSTD}
 "
 echo -e "	${WSTD}Utilities:"
-echo -e "	(${YAY}4${WSTD}) ${STD}Decrypt Wallet Seed${WSTD}"
-echo -e "	(${YAY}5${WSTD}) ${STD}Decrypt Deposit IDs${WSTD}"
-echo -e "	(${YAY}6${WSTD}) ${STD}Decrypt Withdrawal IDs${WSTD}"
-echo -e "	(${YAY}7${WSTD}) ${STD}Enter Monero Wallet CLI (Advanced)${WSTD}
+echo -e "	(${YAY}4${WSTD}) ${STD}Update MoneroMixer now${WSTD}"
+echo -e "	(${YAY}5${WSTD}) ${STD}Decrypt Wallet Seed${WSTD}"
+echo -e "	(${YAY}6${WSTD}) ${STD}Decrypt Deposit IDs${WSTD}"
+echo -e "	(${YAY}7${WSTD}) ${STD}Decrypt Withdrawal IDs${WSTD}"
+echo -e "	(${YAY}8${WSTD}) ${STD}Enter Monero Wallet CLI (Advanced)${WSTD}
 "
- echo -e "	(${YAY}8${WSTD}) ${STD}Return to Main Menu${STD}" 
+ echo -e "	(${YAY}9${WSTD}) ${STD}Return to Main Menu${STD}" 
 settings_menu_options
 }
 
 settings_menu_options() {
 local choice
 echo -n -e "
-            Enter ${WSTD}choice${STD} [${YAY}1${STD} - ${YAY}8${STD}]:${YAY} "
+            Enter ${WSTD}choice${STD} [${YAY}1${STD} - ${YAY}9${STD}]:${YAY} "
 read -r choice
 	case $choice in
         1) export_settings && ../Scripts/setup.sh set_fiat;;
 		2) export_settings && ../Scripts/setup.sh set_daemon;;
         3) export_settings && ../Scripts/setup.sh set_priority;;
-        # 4) clean_all_no_exit && ../../Scripts/setup.sh ;;
-        4) decrypt_view_seed ;;
-		5) decrypt_view_depositIDs ;;
-		6) decrypt_view_withdrawalIDs ;;
-        7) wallet_cli ;;
-		8) main_menu ;;
+        4) confirm_update ;;
+        5) decrypt_view_seed ;;
+		6) decrypt_view_depositIDs ;;
+		7) decrypt_view_withdrawalIDs ;;
+        8) wallet_cli ;;
+		9) main_menu ;;
 		*) printf "             ${ERR}Invalid Choice...${STD}" && sleep 2 && $previous_menu
 	esac
 }
@@ -1357,6 +1358,33 @@ export kdf_arg
 clean_all_no_exit
 }
 
+confirm_update() {
+if zenity --question --title="Confirm update" --text="Updating MoneroMixer will take a few minutes. Are you sure you want to continue?" --ok-label="Update MoneroMixer now" 2> /dev/null
+then 
+    clean_all_no_exit && update
+else
+    $previous_menu
+fi 
+}
+
+update() {
+title 
+echo -e "Updating MoneroMixer and it's dependencies...
+
+${ERR}(This may take some time. Please wait.)${WSTD}"
+while ! test -d MoneroMixer 
+do 
+    cd ../
+done
+mv MoneroMixer old_MoneroMixer 
+(test $USER = "amnesia" || sudo -p " Enter password for $USER to begin downloading MoneroMixer: " apt update 2> /dev/null)
+((test $USER = "amnesia" || sudo apt -y install git zenity python3-pip tor 2> /dev/null) && torsocks git clone https://github.com/FungibilityMatters/MoneroMixer) | (zenity --progress --title="Updating MoneroMixer" --text="Please wait. MoneroMixer will start automatically once finished..." --pulsate --auto-close --auto-kill 2> /dev/null) 
+chmod +x MoneroMixer/setup.sh && ./MoneroMixer/setup.sh update
+mv old_MoneroMixer/Wallets MoneroMixer/Wallets
+rm -rf old_MoneroMixer
+cd MoneroMixer
+./start 
+}
 
 #HELP FUNCTIONS:
 show_help() {
