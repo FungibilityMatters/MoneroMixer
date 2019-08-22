@@ -210,6 +210,9 @@ chmod +x monero-wallet-cli
 cd ../
 }
 
+download_python_dependencies(){
+test $(whoami) = "amnesia" || $(pip3 install requests qrcode) | zenity --progress --title "Downloading Python3 Dependencies" --text "Please wait. MoneroMixer will start automatically once finished..." --pulsate --auto-close --auto-kill 2> /dev/null
+}
 
 file_setup() {
 mkdir Scripts Info    
@@ -239,6 +242,7 @@ write_settings
 
 
 if test -z "$1"; then 
+    download_python_dependencies
     download_monero_wallet_cli
     description
     setup_choice
