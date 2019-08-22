@@ -219,7 +219,7 @@ mkdir Scripts Info
 mv MoneroMixer.py Scripts/MoneroMixer.py 
 mv MoneroMixer.sh Scripts/MoneroMixer.sh
 mv setup.sh Scripts/setup.sh
-#mv LICENSE Info/LISCENSE.txt 
+mv user-agents.txt Info/user-agents.txt 
 mv README.md Info/README.md
 
 chmod +x Scripts/MoneroMixer.sh
