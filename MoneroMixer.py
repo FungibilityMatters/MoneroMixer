@@ -4,13 +4,23 @@ import argparse
 import requests
 import math
 import qrcode
+import random
 from time import sleep
 from time import time
 from concurrent.futures import ThreadPoolExecutor
 from sys import argv
 
-HEADERS = {"Accept": "application/json", "Content-Type": "application/json",
-"User-Agent" : "Mozilla/5.0 (Windows NT 6.1; rv:60.0) Gecko/20100101 Firefox/60.0"}
+#REQUEST HELPER FUNCTIONS
+def get_random_user_agent(num_ua):
+    uaList = []
+    all_ua = open("../../Info/user-agents.txt").readlines()  
+    for i in range(num_ua):
+        uaList.append(all_ua[random.randint(0,len(all_ua))])
+    return uaList
+
+def make_header(args):
+    return {"Accept": "application/json", "Content-Type": "application/json",
+"User-Agent" : get_random_user_agent(1)[0].strip()}
 
 # WALLET HELPER FUNCTIONS
 def get_balance(index):
@@ -58,7 +68,7 @@ def update_prices(args):
         result = requests.get(
             "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms={},EUR,BTC,LTC,ETH,BCH,DASH".format(
                 args.fiat
-            )
+            ), headers = make_header(0) 
         )
         with open("fiat-prices", "w+") as f:
             f.write(result.text + "\n{}".format(time()))
@@ -190,12 +200,12 @@ def view(args):
 def order_status(exchange, order_id):
     if exchange == "XMR.to":
         response = requests.post(
-            "https://xmr.to/api/v2/xmr2btc/order_status_query/", data={"uuid": order_id}
+            "https://xmr.to/api/v2/xmr2btc/order_status_query/", headers = make_header(0), data={"uuid": order_id}
         )
     elif exchange == "Godex.io":
-        response = requests.get("https://api.godex.io/api/v1/transaction/" + order_id)
+        response = requests.get("https://api.godex.io/api/v1/transaction/" + order_id, headers = make_header(0))
     else:
-        response = requests.get("https://api.morphtoken.com/morph/" + order_id)
+        response = requests.get("https://api.morphtoken.com/morph/" + order_id, headers = make_header(0))
 
     if response.status_code == 200 or response.status_code == 201:
         return response.json()
@@ -232,7 +242,7 @@ def rates(args):
                     "https://api.godex.io/api/v1/info{}".format(
                         "-revert" if coin_out == "XMR" else ""
                     ),
-                    headers=HEADERS,
+                    headers = make_header(0),
                     json=json_data,
                 ).json()
                 rate = float(result["rate"])
@@ -246,7 +256,7 @@ def rates(args):
                     "output": [{"asset": coin_out, "weight": 10000}],
                 }
                 result = requests.post(
-                    "https://api.morphtoken.com/limits", headers=HEADERS, json=json_data
+                    "https://api.morphtoken.com/limits", headers = make_header(0), json=json_data
                 ).json()
                 rate = float(result["output"][0]["seen_rate"])
                 minimum = float(morph_format(coin_in, result["input"]["limits"]["min"]))
@@ -281,7 +291,8 @@ def rates(args):
         )
         try:
             response = requests.get(
-                "https://xmr.to/api/v2/xmr2btc/order_parameter_query/"
+                "https://xmr.to/api/v2/xmr2btc/order_parameter_query/",
+                headers = make_header(0)
             )
             result = response.json()
             rate = result["price"]
@@ -466,7 +477,7 @@ def create_transaction(
         err_msg_key = "description"
 
     return process_response(
-        requests.post(APIurl, headers=HEADERS, json=json_data),
+        requests.post(APIurl, headers = make_header(0), json=json_data),
         exchange,
         id_key,
         err_msg_key,
@@ -560,7 +571,7 @@ def withdraw_data_out(exchange, result, xmr_amount):
 
         result2 = requests.post(
             "https://api.godex.io/api/v1/info",
-            headers=HEADERS,
+            headers = make_header(0),
             json={
                 "from": result["coin_from"],
                 "to": result["coin_to"],
@@ -1037,7 +1048,7 @@ def get_coins(args):
 
     try:
         result = requests.get(
-            "https://api.godex.io/api/v1/coins", headers=HEADERS, timeout=10
+            "https://api.godex.io/api/v1/coins", headers = make_header(0), timeout=10
         ).json()
 
         for coin in result:
@@ -1259,7 +1270,7 @@ def get_option(option_dataList):
 
         if exchange == "XMR.to":
             url = "https://xmr.to/api/v2/xmr2btc/order_parameter_query/"
-            result = requests.get(url, headers=HEADERS).json()
+            result = requests.get(url, headers = make_header(0)).json()
 
             minimum = float(result["lower_limit"])
             maximum = float(result["upper_limit"])
@@ -1272,7 +1283,7 @@ def get_option(option_dataList):
                 "output": [{"asset": coin_out, "weight": 10000}],
             }
 
-            result = requests.post(url, headers=HEADERS, json=json_data).json()
+            result = requests.post(url, headers = make_header(0), json=json_data).json()
             minimum = float(result["input"]["limits"]["min"])
             maximum = float(result["input"]["limits"]["max"])
             rate = float(result["output"][0]["seen_rate"])
@@ -1280,7 +1291,7 @@ def get_option(option_dataList):
         else:
             url = "https://api.godex.io/api/v1/info" + revert
             json_data = {"from": coin_in, "to": coin_out, "amount": comp_amount}
-            result = requests.post(url, headers=HEADERS, json=json_data).json()
+            result = requests.post(url, headers = make_header(0), json=json_data).json()
             minimum = float(result["min_amount"])
             maximum = float(result["max_amount"])
             rate = float(result["rate"])
@@ -1338,7 +1349,7 @@ def make_price_urlList(coinsList, fiat):
 
 
 def get_priceDictList(price_url):
-    partial_priceDict = requests.get(price_url).json()
+    partial_priceDict = requests.get(price_url, headers = make_header(0)).json()
     return partial_priceDict
 
 
