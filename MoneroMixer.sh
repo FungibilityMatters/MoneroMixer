@@ -1380,7 +1380,7 @@ mv MoneroMixer old_MoneroMixer
 (test $USER = "amnesia" || sudo -p " Enter password for $USER to begin downloading MoneroMixer: " apt update 2> /dev/null)
 ((test $USER = "amnesia" || sudo apt -y install git zenity python3-pip tor 2> /dev/null) && torsocks git clone https://github.com/FungibilityMatters/MoneroMixer) | (zenity --progress --title="Updating MoneroMixer" --text="Please wait. MoneroMixer will start automatically once finished..." --pulsate --auto-close --auto-kill 2> /dev/null)
 cd MoneroMixer 
-chmod +x setup.sh && setup.sh update
+chmod +x setup.sh && ./setup.sh update
 mv ../old_MoneroMixer/Wallets Wallets
 rm -rf ../old_MoneroMixer
 chmod +x start && ./start 
