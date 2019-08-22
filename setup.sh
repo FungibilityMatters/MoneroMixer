@@ -248,6 +248,11 @@ if test -z "$1"; then
     ./Scripts/MoneroMixer.sh
 elif test "$1" = "anotha_one"; then 
     setup_choice
+    while ! test -d Scripts 
+    do 
+        cd ../
+    done
+    ./Scripts/MoneroMixer.sh
 elif test "$1" = "update"; then 
     download_python_dependencies
     download_monero_wallet_cli
