@@ -27,8 +27,8 @@ MoneroMixer="${M}onero${M}ixer${STD}"
 title() {
 echo -e "${STD}SETTING BACKGROUND COLORS TO BLACK                     "
 clear
-title="${WSTD}Welcome to ${MoneroMixer}${WSTD} v${STD}1.0${WSTD} by Fungibility${M}atters${STD}-"
-nocolor="Welcome to MoneroMixer v1.0 by FungibilityMatters-"
+title="${WSTD}Welcome to ${MoneroMixer}${WSTD} v${STD}1.1${WSTD} by Fungibility${M}atters${STD}-"
+nocolor="Welcome to MoneroMixer v1.1 by FungibilityMatters-"
 declare -i len
 len=${#nocolor} 
 shift=1
@@ -199,7 +199,7 @@ echo -e "${WBU}Use responsibly. ${STD}" && sleep 3
 }
 
 download_monero_wallet_cli(){
-mkdir Monero-Software
+test -d Monero-Software || mkdir Monero-Software
 cd Monero-Software
 torsocks wget https://downloads.getmonero.org/cli/linux64 | $(zenity --progress --title="Downloading Monero software from getmonero.org" --text="Downloading Linux64 Monero wallet command line tools from getmonero.org
 
@@ -208,7 +208,26 @@ tar -xzf linux64
 mv monero-x86_64-linux-gnu/monero-wallet-cli monero-wallet-cli
 chmod +x monero-wallet-cli
 cd ../
+test -x Monero-Software/monero-wallet-cli || failed_monero_wallet_cli
 }
+
+failed_monero_wallet_cli(){
+if zenity --question --icon-name='dialog-warning' --title="Error: Failed to download Monero Software" --text="Failed to download monero-wallet-cli from getmonero.org
+
+Try again or download the Monero Software manually to continue" --ok-label="Try automatic download again" --cancel-label="Download manually" 2> /dev/null
+then 
+    download_monero_wallet_cli
+else
+    zenity --info --title="How to setup Monero software manually" --text="1. Download the Monero Linux64 Command Line tool from this link:
+https://downloads.getmonero.org/cli/linux64
+
+2. Unzip the zip archive and find the file called monero-wallet-cli inside the unpacked file.
+
+3. Copy monero-wallet-cli to the Monero-Software folder inside your MoneroMixer folder (MoneroMixer/Monero-Software) then press Ok to continue." 2> /dev/null
+fi 
+test -x Monero-Software/monero-wallet-cli || failed_monero_wallet_cli
+}
+
 
 download_python_dependencies(){
 test $(whoami) = "amnesia" || $(pip3 install requests qrcode) | zenity --progress --title "Downloading Python3 Dependencies" --text "Please wait. MoneroMixer will start automatically once finished..." --pulsate --auto-close --auto-kill 2> /dev/null
@@ -221,6 +240,7 @@ mv MoneroMixer.sh Scripts/MoneroMixer.sh
 mv setup.sh Scripts/setup.sh
 mv user-agents.txt Info/user-agents.txt 
 mv README.md Info/README.md
+mv FungibilityMatters_PGP_Key.asc Info/FungibilityMatters_PGP_Key.asc
 
 chmod +x Scripts/MoneroMixer.sh
 chmod +x start
