@@ -1,4 +1,4 @@
-# MoneroMixer v1.0: The easiest way to use Monero to anonymously exchange and properly mix XMR, BTC, LTC, ETH, BCH, & 100+ other coins on Tails OS or Whonix.
+# MoneroMixer v1.1: The easiest way to use Monero to anonymously exchange and properly mix XMR, BTC, LTC, ETH, BCH, & 100+ other coins on Tails OS or Whonix.
 
 HOW TO SETUP: 
 1. Right click anywhere on your desktop. On Tails or Ubuntu select "Open Terminal" on Whonix select "Applications" > "Terminal Emulator". This will open a terminal window. 
@@ -58,9 +58,8 @@ and donations are not required by any means. However, if you're feeling generous
 I would greatly appreciate a donation of any amount you're willing to give to help fund this project. 
 
 Your donation would be used to fund: 
--Implementing additional non-KYC exchanges.
--Integrating additional secure withdrawal methods.  For example, XMR.to to Bitrefill to allow you to withdraw your XMR balance as gift cards.
--Building a real GUI for MoneroMixer so you never have to open up a terminal window ever again!
+- Implementing additional non-KYC exchanges.
+- Integrating additional secure withdrawal methods.  For example, XMR.to to Bitrefill to allow you to withdraw your XMR balance as gift cards.
+- Building a real GUI for MoneroMixer so you never have to open up a terminal window ever again!
 
 If you’re feeling generous donate XMR to: `4AmmKxwNxezFuCsNPkujS2SxXqDTuchbE1BzGGMggFCfeGQm9ew2FTjYzVwZvwQhaMGmTAJKUNCc1LboGyVwUb4t1bUpvNn`
-
