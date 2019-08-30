@@ -21,16 +21,16 @@ MoneroMixer="${M}onero${M}ixer${STD}"
 title() {
 echo -e "${STD}SETTING BACKGROUND COLORS TO BLACK                     "
 clear
-print_title '-' "${WSTD}${MoneroMixer}${WSTD} v${STD}1.0${WSTD} by Fungibility${M}atters${STD}-" \
-"MoneroMixer v1.0 by FungibilityMatters-" 
+print_title '-' "${WSTD}${MoneroMixer}${WSTD} v${STD}1.1${WSTD} by Fungibility${M}atters${STD}-" \
+"MoneroMixer v1.1 by FungibilityMatters-" 
 printf '\n'
 }
 
 title_welcome() {
 echo -e "${STD}SETTING BACKGROUND COLORS TO BLACK                     "
 clear
-print_title '-' "${WSTD}Welcome to ${MoneroMixer}${WSTD} v${STD}1.0${WSTD} by Fungibility${M}atters${STD}-" \
-"Welcome to MoneroMixer v1.0 by FungibilityMatters-"
+print_title '-' "${WSTD}Welcome to ${MoneroMixer}${WSTD} v${STD}1.1${WSTD} by Fungibility${M}atters${STD}-" \
+"Welcome to MoneroMixer v1.1 by FungibilityMatters-"
 printf '\n'
 } 
 
@@ -837,7 +837,9 @@ update_balance
 print_balance
 
 old_IFS="$IFS" && IFS='|'
-tx_data_in=$(zenity --forms --text="Enter Destination Address and Exact XMR Amount to send" --add-entry="Destination Address where XMR will be sent:" --add-entry="Exact XMR Amount to send:" --title "Enter Destination Address and XMR Amount" --timeout 120 2> /dev/null)
+tx_data_in=$(zenity --forms --text="Enter Destination Address and Exact XMR Amount to send
+
+Enter 'ALL' as the amount to send your entire XMR balance (sweep_all)." --add-entry="Destination Address where XMR will be sent:" --add-entry="Exact XMR Amount to send:" --title "Enter Destination Address and XMR Amount" --timeout 120 2> /dev/null)
 test -z "$tx_data_in" && $previous_menu
 test "$tx_data_in" = "|" && clean_all_exit 
 read -ra tx_data <<< ${tx_data_in}
@@ -847,6 +849,7 @@ xmr_amount="${tx_data[1]}"
 
 test -z "$xmr_address" && required_error "XMR destination address"
 test -z "$xmr_amount" && required_error "XMR amount to send"
+test "$xmr_amount" = "ALL" && xmr_amount="ALL of your remaining"
     
 torsocks python3 ../../Scripts/MoneroMixer.py validate --address $address --coin XMR --type destination
 validation_error_check
@@ -861,6 +864,7 @@ $xmr_address. " --ok-label="Confirm and proceed with withdrawal" --cancel-label=
 then         
     exchange="$xmr_address" 
     wallet_withdraw_confirmed
+    $previous_menu
 else
     $previous_menu
 fi 
@@ -918,12 +922,23 @@ $(echo -n "${password}
 " | torsocks ../../Monero-Software/monero-wallet-cli --daemon-address $daemon --wallet-file $name --password $password --command refresh > wallet-cli-out) | $(zenity --progress --title "Refreshing your wallet" --text="Refreshing your wallet and resynchronizing it with the Monero blockchain..." --pulsate --auto-close --auto-kill --no-cancel 2> /dev/null) 
 wallet_error_check
 
-echo -e "
+if ! test "$xmr_amount" = "ALL of your remaining"
+then
+    echo -e "
 Sending ${WBU}$xmr_amount ${YAY}XMR${STD} to ${WSTD}$exchange${STD}...
 ${GRN}"
-set_noconf
-$(echo -n "${password}
-" | torsocks ../../Monero-Software/monero-wallet-cli --no-dns --daemon-address $daemon --wallet-file $name --password $password --command transfer $priority $ringsize $xmr_address $xmr_amount > wallet-cli-out ) | $(zenity --progress --title "Sending your transaction" --text="Sending $xmr_amount to $exchange..." --pulsate --auto-close --auto-kill --no-cancel 2> /dev/null) 
+    set_noconf
+    $(echo -n "${password}
+" | torsocks ../../Monero-Software/monero-wallet-cli --no-dns --daemon-address $daemon --wallet-file $name --password $password --command transfer $priority $ringsize $xmr_address $xmr_amount > wallet-cli-out ) | $(zenity --progress --title "Sending your transaction" --text="Sending $xmr_amount XMR to $exchange..." --pulsate --auto-close --auto-kill --no-cancel 2> /dev/null) 
+else
+    echo -e "
+Sending ${WBU}all of your remaining ${YAY}XMR${STD} to ${WSTD}$exchange${STD}...
+${GRN}"
+    set_noconf
+    $(echo -n "${password}
+y
+" | torsocks ../../Monero-Software/monero-wallet-cli --no-dns --daemon-address $daemon --wallet-file $name --password $password --command sweep_all $priority $xmr_address > wallet-cli-out ) | $(zenity --progress --title "Sending your transaction" --text="Sending all of your remaining XMR to $exchange..." --pulsate --auto-close --auto-kill --no-cancel 2> /dev/null)     
+fi
 unset -v xmr_amount xmr_address
 grep "Transaction" wallet-cli-out
 wallet_error_check
@@ -1590,7 +1605,8 @@ wallet_error_check
 echo -e "Sending your leftover ${YAY}XMR${STD} to ${WSTD}$dev...
 "
 #echo -n "${password}
-echo -n "y
+echo -n "${password}
+y
 " | torsocks ../../Monero-Software/monero-wallet-cli --no-dns --daemon-address $daemon --wallet-file $name --password $password --command sweep_all unimportant $devaddress > wallet-cli-out
 wallet_error_check
 
