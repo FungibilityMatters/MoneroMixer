@@ -66,6 +66,7 @@ If you’re feeling generous donate XMR to: `4AmmKxwNxezFuCsNPkujS2SxXqDTuchbE1B
 
 
 **Changelog:**
+
 Update v1.1:
 - Easy (Automatic) setup now works on Whonix, and Ubuntu! Users on (almost) all 64bit systems, can now easily setup MoneroMixer and create a wallet by simply copy and pasting a line of code. Just like on Tails as shown in the video on my original post.
 - All python requests now include a randomly selected user agent in their header, allow_redirects is set to false, and timeout after 30 seconds per the suggestions of /u/dsc__
