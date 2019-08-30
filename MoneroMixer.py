@@ -1069,17 +1069,20 @@ def get_coins(args):
     coins = ""
     tickers = ""
     for ticker in popularList:
-        if args.out == "checklist":
-            coins += "{} {} {} ".format(
-                ticker, ticker, coinDict[ticker].replace(" ", "-").replace("---", "-")
-            )
-        else:
-            coins += "{} {} ".format(
-                ticker, coinDict[ticker].replace(" ", "-").replace("---", "-")
-            )
-            if args.out == "tickers":
-                tickers += "{} ".format(ticker)
-        tickerList.remove(ticker)
+        try:
+            if args.out == "checklist":
+                coins += "{} {} {} ".format(
+                    ticker, ticker, coinDict[ticker].replace(" ", "-").replace("---", "-")
+                )
+            else:
+                coins += "{} {} ".format(
+                    ticker, coinDict[ticker].replace(" ", "-").replace("---", "-")
+                )
+                if args.out == "tickers":
+                    tickers += "{} ".format(ticker)
+            tickerList.remove(ticker)
+        except:
+            popularList.remove(ticker)
     for ticker in tickerList:
         if args.out == "checklist":
             coins += "{} {} {} ".format(
