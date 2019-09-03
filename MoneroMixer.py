@@ -200,7 +200,7 @@ def view(args):
 def order_status(exchange, order_id):
     if exchange == "XMR.to":
         response = requests.post(
-            "https://xmr.to/api/v2/xmr2btc/order_status_query/", headers=make_header(0), allow_redirects=False, timeout=30, data={"uuid": order_id}
+            "https://xmr.to/api/v2/xmr2btc/order_status_query/", allow_redirects=False, timeout=30, data={"uuid": order_id}
         )
     elif exchange == "Godex.io":
         response = requests.get("https://api.godex.io/api/v1/transaction/" + order_id, headers=make_header(0), allow_redirects=False, timeout=30,)
