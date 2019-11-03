@@ -1,9 +1,16 @@
-#!/bin/bash
-./Scripts/MoneroMixer.sh
-
-#   Did you accidently open this file while trying to start MoneroMixer?
+#######################################################################################
+#   Did you accidently open this file while trying to start MoneroMixer?              
 #   To run MoneroMixer:
 #   1. Right click the whitespace under the file "start" and click "Open in Terminal"
 #   2. In the terminal window type "./start" then press ENTER
+########################################################################################
+
+#!/bin/bash
+HISTSIZE=0
+chmod +x scripts/shell/MoneroMixer.sh
+./scripts/shell/MoneroMixer.sh $1
+
+
+
 
 
