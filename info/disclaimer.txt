@@ -1,0 +1,7 @@
+To use MoneroMixer you must agree to the following conditions:
+
+1. You agree to adhere to the guidelines set by any relevant laws in your jurisdiction that may apply to your use of MoneroMixer. The developer does not condone any unlawful use of the privacy and encryption tools in this software.
+
+2. You accept full responsibility for anything you choose to do with this software and acknowledge that the developer and/or contributors to MoneroMixer or its dependencies are not aware of nor liable for anything you do before, during or after you use this software. 
+
+With great privacy comes great responsibility... 
