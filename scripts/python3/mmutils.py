@@ -68,7 +68,9 @@ class Updater(object):
           
         with open(filename, 'wb') as f:
             copyfileobj(response.raw, f)
-        
+        if filename == "XMR.png":
+            img = Image.open(filename)
+            img.save("MMICON.png")
         if ".svg" not in filename:
             img = Image.open(filename).resize((25,25))
             img.save(filename.replace(filename.split(".")[1], "png"))
