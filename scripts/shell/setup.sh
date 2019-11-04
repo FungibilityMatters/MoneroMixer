@@ -258,7 +258,7 @@ move_setup(){
 }
 
 file_setup() {
-    shred -u .git
+    rm -rf .git
     mv README.md info/README.md
     mkdir icons
     chmod +x start
