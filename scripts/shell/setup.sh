@@ -265,6 +265,24 @@ file_setup() {
 }
 
 
+make_desktop_launcher(){
+    if [ $USER != "amnesia" ]; then
+        MMPATH="$PWD"
+        cd ~/Desktop
+        echo "[Desktop Entry]
+Type=Application
+Terminal=true
+Name=Start MoneroMixer
+Icon=${MMPATH}/icons/MMICON.png
+Exec=${MMPATH}/start
+Categories=Application
+Path=${MMPATH}" > MoneroMixer.desktop
+        chmod +x MoneroMixer.desktop
+        cd "$MMPATH"
+    fi
+}
+
+
 if [ -z "$1" ]; then
     . scripts/shell/mmutils.sh
     . scripts/shell/settings.sh
@@ -272,7 +290,8 @@ if [ -z "$1" ]; then
     check_if_persistent
     $(download_new_icons &> /dev/null) &
     download_python_dependencies
-    download_monero_wallet_cli    
+    download_monero_wallet_cli
+    make_desktop_launcher
     description
     disclaimer
     setup_choice
