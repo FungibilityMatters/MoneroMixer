@@ -108,7 +108,7 @@ Options are ranked by exchange rate to ensure that you always get the best deal!
     
         set_IFS "|"
         read -r exchange coin <<<$(unset_IFS && zenity --list --height=250 --width=200 \
-                               --title="Choose a $2 option" --ok-label="Continue with selected $1 option" \
+                               --title="Choose a $2 option" --ok-label="Continue with selected $2 option" \
                                --text="Select a option from the list or press cancel\nto go back to the main menu and try again:" \
                                --column="option" --column="Coin" --column="Exchange" \
                                --hide-column=1 $(cat options-list && rm -f options-list) 2> /dev/null)
