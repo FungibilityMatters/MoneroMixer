@@ -185,10 +185,7 @@ if [ -z "$1" ]; then
     download_python_dependencies
     download_monero_wallet_cli
     make_launchers
-    #description
-    #disclaimer
-    #setup_choice
-    ./start
+    $(sleep .1 && ./start) &
 elif [ "$1" = "update" ]; then 
     download_python_dependencies
     download_monero_wallet_cli
