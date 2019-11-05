@@ -90,6 +90,7 @@ clean_all_exit() {
     printf "\n${GRN}Done. Your data is now secure.\n\n"
     printf "${STD}TO RUN MONEROMIXER AGAIN USE THIS COMMAND IN A NEW TERMINAL:
 ${WBU}cd $PWD && ./start\n\n"
+    read discard
     exit
 }
 
