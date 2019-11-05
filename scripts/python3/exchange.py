@@ -214,7 +214,7 @@ class Xmrto(ExchangeHandler):
     def __init__(self, inputDict):
         super().__init__(inputDict)
         self.exchange = "XMR.to"
-        self.API_base_url = "http://xmrto2bturnore26.onion/api/v2/xmr2btc/"
+        self.API_base_url = "http://xmr.to/api/v2/xmr2btc/"
         self.id_key = "uuid"
         self.err_msg_key = "error_msg"
         self.in_amount_key = "xmr_amount_remaining"
