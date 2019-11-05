@@ -1,4 +1,5 @@
 
+
 #DEFAULT SETTINGS:
 use_default_settings(){
     daemon="zdhkwneu7lfaum2p.onion:18099"
@@ -157,9 +158,9 @@ set_seconds_before_update(){
 setup_choice() {
     use_default_settings
     title
-    printf "${WSTD}How would you like to configure your ${MoneroMixer}${WSTD} settings?${STD}\n"
-    printf "Select '${WBU}Use default settings${STD}' to automatically configure ${MoneroMixer} with the 
-default settings. (Recommended for new users)${STD} 
+    printf "${WSTD}How would you like to configure your ${MoneroMixer}${WSTD} settings for $name?${STD}\n\n"
+    printf "Select '${WBU}Use default settings${STD}' to automatically configure $name with the 
+default ${MoneroMixer} settings. (Recommended for new users)${STD} 
 
 
     ${WBU}Default Settings:                           
@@ -174,8 +175,8 @@ default settings. (Recommended for new users)${STD}
 ${WSTD}NOTE: You can modify your settings later from the Settings and Utilities Menu." 
 
     if ! zenity --question --ellipsize \
-         --title="How would you like to configure your MoneroMixer settings?" \
-         --text="Select 'Use default settings' to automatically configure MoneroMixer \nwith the default settings. (Recommended for new users)" \
+         --title="How would you like to configure your MoneroMixer settings for $name?" \
+         --text="Select 'Use default settings' to automatically configure $name \nwith the default MoneroMixer settings. (Recommended for new users)" \
          --cancel-label="Choose custom settings" \
          --ok-label="Use default settings" 2> /dev/null
     then
