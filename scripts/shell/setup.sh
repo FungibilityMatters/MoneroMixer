@@ -262,12 +262,11 @@ file_setup() {
     rm -rf .git
     mv README.md info/README.md
     mkdir icons
-    chmod +x start
     chmod +x scripts/shell/MoneroMixer.sh
 }
 
-make_start_launcher() {
-    term_args=( "-terminal --title=\"MoneroMixer v1.2\" --hide-menubar -e \"sh -c '" "\$1;\$SHELL'\"" )
+make_launchers() {
+    term_args=( "-terminal --title=\"MoneroMixer v1.2\" -e \"sh -c '" "\$1;\$SHELL'\"" )
     mmscript="./scripts/shell/MoneroMixer.sh"
     if echo "$XDG_MENU_PREFIX" | grep -q "gnome"; then
         terminal="gnome"
@@ -284,9 +283,8 @@ make_start_launcher() {
 #   2. In the terminal window type \"./start\" then press ENTER
 ########################################################################################
 ${terminal}${term_args[0]}${mmscript}${term_args[1]}" > start
-} 
+    chmod +x start
 
-make_desktop_launcher(){
     if [ $USER != "amnesia" ]; then
         MMPATH="$PWD"
         cd ~/Desktop
@@ -297,7 +295,7 @@ Name=Start MoneroMixer
 Icon=${MMPATH}/icons/MMICON.png
 Categories=Application
 Path=${MMPATH}
-Exec=bash -c './start;$SHELL'" > MoneroMixer.desktop
+Exec=${MMPATH}/start" > MoneroMixer.desktop
         chmod +x MoneroMixer.desktop
         cd "$MMPATH"
     fi
@@ -312,8 +310,7 @@ if [ -z "$1" ]; then
     $(download_new_icons &> /dev/null) &
     download_python_dependencies
     download_monero_wallet_cli
-    make_desktop_launcher
-    make_start_launcher
+    make_launchers
     description
     disclaimer
     setup_choice
