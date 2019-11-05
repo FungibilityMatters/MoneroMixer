@@ -127,7 +127,7 @@ def get_option(option_dataList):
             comp_amount = float(amount[0]) / priceDict.get(coin_in).get(fiat)
 
         if exchange == "XMR.to":
-            result = mmutils.FakeUARequests.get("http://xmrto2bturnore26.onion/api/v2/xmr2btc/order_parameter_query/").json()
+            result = mmutils.FakeUARequests.get("https://xmr.to/api/v2/xmr2btc/order_parameter_query/").json()
 
             minimum = float(result.get("lower_limit"))
             maximum = float(result.get("upper_limit"))
