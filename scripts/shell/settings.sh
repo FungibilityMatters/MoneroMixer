@@ -158,8 +158,8 @@ set_seconds_before_update(){
 setup_choice() {
     use_default_settings
     title
-    printf "${WSTD}How would you like to configure your ${MoneroMixer}${WSTD} settings for $name?${STD}\n\n"
-    printf "Select '${WBU}Use default settings${STD}' to automatically configure $name with the 
+    printf "${WSTD}How would you like to configure your ${MoneroMixer}${WSTD} settings for ${YAY}$name${WSTD}?${STD}\n\n"
+    printf "Select '${WBU}Use default settings${STD}' to automatically configure ${YAY}$name${STD} with the 
 default ${MoneroMixer} settings. (Recommended for new users)${STD} 
 
 
