@@ -140,7 +140,7 @@ file_setup() {
 }
 
 make_launchers() {
-    term_args=( "-terminal --title=\"MoneroMixer v1.2\" -e \"sh -c '" "\$1;\$SHELL'\"" )
+    term_args=( "-terminal --title=\"MoneroMixer v1.2\" --hide-menubar -e \"sh -c '" "\$1;\$SHELL'\"" )
     mmscript="./scripts/shell/MoneroMixer.sh"
     if echo "$XDG_MENU_PREFIX" | grep -q "gnome"; then
         terminal="gnome"
