@@ -164,17 +164,21 @@ ${terminal}${term_args}${mmscript}" > start
 
 #    if [ $USER != "amnesia" ]; then
 
-        cd ~/Desktop
+        #cd ~/Desktop
         echo "[Desktop Entry]
+Version=1.2
+Encoding=UTF-8
 Type=Application
 Terminal=true
-Name=Start MoneroMixer
+Name=MoneroMixer
 Icon=${MMPATH}/icons/MMICON.png
-Categories=Application
+Categories=Application;Network;Finance;Utility;
 Path=${MMPATH}
 Exec=${MMPATH}/start" > MoneroMixer.desktop
         chmod +x MoneroMixer.desktop
-        cd "$MMPATH"
+        #cd "$MMPATH"
+        xdg-desktop-icon install MoneroMixer.desktop --novendor
+        xdg-desktop-menu install MoneroMixer.desktop --novendor
 #    fi
 }
 
