@@ -182,7 +182,7 @@ main(){
         if !(test -d wallets); then
             description
             disclaimer
-            setup_choice
+            #setup_choice
             mkdir wallets && cd wallets
             gen_wallet_and_seed_file
         else
