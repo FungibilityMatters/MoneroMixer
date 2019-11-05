@@ -231,7 +231,7 @@ wallet_confirm_withdrawal(){
 $coin_out amount that will be sent: $coin_amount $coin_out
 XMR amount that will be withdrawn from your wallet: $xmr_amount XMR" &> /dev/null
     then
-        wallet_auth_password "Iniate withdrawal" "" #"noexit"
+        wallet_auth_password "Initiate withdrawal" "" #"noexit"
         unset -v coin_amount dest_address
         wallet_withdraw_confirmed
     else
