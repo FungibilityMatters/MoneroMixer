@@ -167,7 +167,7 @@ wallet_options(){
 }
 
 main(){
-    filenames=( "mmutils" "error" "settings" "wallet" "wallet_gen" \
+    filenames=( "welcome" "mmutils" "error" "settings" "wallet" "wallet_gen" \
                 "exchange" "exchange_menus" "update" "help" "donate" )
 
     for filename in "${filenames[@]}"; do
@@ -180,6 +180,9 @@ main(){
         wallet_restore_from_seed
     else
         if !(test -d wallets); then
+            description
+            disclaimer
+            setup_choice
             mkdir wallets && cd wallets
             gen_wallet_and_seed_file
         else
