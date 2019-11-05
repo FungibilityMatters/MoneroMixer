@@ -274,9 +274,9 @@ Type=Application
 Terminal=true
 Name=Start MoneroMixer
 Icon=${MMPATH}/icons/MMICON.png
-Exec=${MMPATH}/start
 Categories=Application
-Path=${MMPATH}" > MoneroMixer.desktop
+Path=${MMPATH}
+Exec=bash -c './start;$SHELL'" > MoneroMixer.desktop
         chmod +x MoneroMixer.desktop
         cd "$MMPATH"
     fi
