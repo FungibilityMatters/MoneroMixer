@@ -15,7 +15,7 @@ GRN="\033[01;32;${BG}m"
 M="\033[0;4;33;${BG}mM${WSTD}"
 MoneroMixer="${M}onero${M}ixer${STD}"
 
-title() {
+welcome_title() {
     echo -e "${STD}SETTING BACKGROUND COLORS TO BLACK                     "
     clear
     title="${WSTD}Welcome to ${MoneroMixer}${WSTD} v${STD}1.2${WSTD} by Fungibility${M}atters${STD}-"
@@ -31,14 +31,9 @@ title() {
     printf '\n\n'
 }
 
-got_it() {
-    echo -n -e "	${YAY}Got it? ${STD}[${WSTD}When you are ${STD}ready${WSTD} press ${YAY}ENTER${WSTD} to continue${STD}]${WSTD}:"
-    read discard
-    title
-}
 
 description() {
-    title
+    welcome_title
     echo -e "${MoneroMixer} ${ITL}will create and manage a simple Monero wallet for you so that you 
 can utilize the security benefits of Monero's privacy protocol without any
 programming experience, time consuming setup, or prior knowledge required!${STD} 
@@ -58,7 +53,7 @@ on the ${ITL}${YAY}unbeatable anonymity, security, and privacy${WSTD} benefits o
     zenity --info --ellipsize --title="Welcome to MoneroMixer!" \
     --text="Installation Complete. Welcome to MoneroMixer!" --ok-label="Get started" 2> /dev/null 
 
-    title
+    welcome_title
     echo -e "${YAY}ONLY 2 STEPS ARE REQUIRED${STD} to spend your crypto anonymously with ${MoneroMixer}${WSTD}:"
     echo -e "(For this ${STD}example${WSTD} imagine you wanted to use ${YAY}LTC${WSTD} to send a private ${YAY}BTC${WSTD} payment)
 "  
@@ -88,7 +83,7 @@ All you will need to provide is:
 2. Destination Address where each withdrawal should be sent.
 " 2> /dev/null 
 
-    title
+    welcome_title
     echo -e "${ERR}IMPORTANT: Between steps 1 and 2 you will need to wait a few hours in 
 order to prevent timing based blockchain analysis.${STD}"
     echo -e "
@@ -111,7 +106,7 @@ Make sure you read the instructions carefully and follow the prompts.
 
 NOTE: To quit securely press CTRL-C at any time or select option 8 'Quit'
 from the main menu." 2> /dev/null 
-    title
+    welcome_title
 }
 
 disclaimer(){
@@ -209,7 +204,7 @@ https://downloads.getmonero.org/cli/linux64
 
 download_python_dependencies(){
     [ $USER = "amnesia" ] || $(pip3 install requests qrcode) \
-    | zenity --progress --title "Downloading Python3 Dependencies" \
+    | zenity --progress --title="Downloading Python3 Dependencies" \
       --text "Please wait. MoneroMixer will start automatically once finished..." \
       --pulsate --auto-close --auto-kill 2> /dev/null
 }
