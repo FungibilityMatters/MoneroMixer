@@ -140,12 +140,15 @@ file_setup() {
 }
 
 make_launchers() {
-    term_args=( "-terminal --title=\"MoneroMixer v1.2\" --hide-menubar -e \"sh -c '" "\$1;\$SHELL'\"" )
+    MMPATH="$PWD"
+    term_args="-terminal --title=\"MoneroMixer v1.2\" --hide-menubar"
     mmscript="./scripts/shell/MoneroMixer.sh"
     if echo "$XDG_MENU_PREFIX" | grep -q "gnome"; then
         terminal="gnome"
+        term_args="$term_args -- "
     elif echo "$XDG_MENU_PREFIX" | grep -q "xfce"; then
-        terminal="xfce4" 
+        terminal="xfce4"
+        term_args="$term_args --icon=\"${MMPATH}/icons/MMICON.png\" -e "
     else
         unset -v term_args
     fi
@@ -156,11 +159,11 @@ make_launchers() {
 #   1. Right click the whitespace under the file \"start\" and click \"Open in Terminal\"
 #   2. In the terminal window type \"./start\" then press ENTER
 ########################################################################################
-${terminal}${term_args[0]}${mmscript}${term_args[1]}" > start
+${terminal}${term_args}${mmscript}" > start
     chmod +x start
 
-    if [ $USER != "amnesia" ]; then
-        MMPATH="$PWD"
+#    if [ $USER != "amnesia" ]; then
+
         cd ~/Desktop
         echo "[Desktop Entry]
 Type=Application
@@ -172,7 +175,7 @@ Path=${MMPATH}
 Exec=${MMPATH}/start" > MoneroMixer.desktop
         chmod +x MoneroMixer.desktop
         cd "$MMPATH"
-    fi
+#    fi
 }
 
 
