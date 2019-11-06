@@ -162,24 +162,21 @@ make_launchers() {
 ${terminal}${term_args}${mmscript}" > start
     chmod +x start
 
-#    if [ $USER != "amnesia" ]; then
-
-        #cd ~/Desktop
-        echo "[Desktop Entry]
+    echo "[Desktop Entry]
 Version=1.2
 Encoding=UTF-8
 Type=Application
-Terminal=true
+Terminal=false
 Name=MoneroMixer
+Comment=Anonymously transact XMR, BTC, ETH, and 100+ other coins
 Icon=${MMPATH}/icons/MMICON.png
-Categories=Application;Network;Finance;Utility;
+Categories=Application;Network;
 Path=${MMPATH}
 Exec=${MMPATH}/start" > MoneroMixer.desktop
-        chmod +x MoneroMixer.desktop
-        #cd "$MMPATH"
-        xdg-desktop-icon install MoneroMixer.desktop --novendor
-        xdg-desktop-menu install MoneroMixer.desktop --novendor
-#    fi
+    chmod +x MoneroMixer.desktop
+    xdg-desktop-icon install MoneroMixer.desktop --novendor
+    xdg-desktop-menu install MoneroMixer.desktop --novendor
+    mv MoneroMixer.desktop icons/MoneroMixer.desktop
 }
 
 
