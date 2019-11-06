@@ -1,6 +1,7 @@
 # MoneroMixer v1.2: The easiest way to use Monero to anonymously exchange and properly mix XMR, BTC, LTC, ETH, BCH, & 100+ other coins on Tails OS or Whonix.
 
 ## HOW TO SETUP: 
+
 1. Right click anywhere on your desktop. On Tails or Ubuntu select "Open Terminal" on Whonix select "Applications" > "Terminal Emulator". This will open a terminal window. 
 2. Copy and paste then line below in its entirety into the terminal window then press ENTER.
 
@@ -8,14 +9,14 @@
 
 3. Select the location when you would like to install MoneroMixer, then click "Ok".
 4. If you are NOT using Tails, you will be asked for your password before the download begins. (Tails users can ignore this step)
-
-In the terminal window you will now see that MoneroMixer has begun downloading and will start automatically once the download is complete. 
+5. Wait for the download and installation to complete. MoneroMixer will start automatically once finished.  
 
 Now all you have to do is follow the prompts within the program and your Monero Wallet will be generated for you. You will be asked for a name and password for your new wallet. 
 
 
 ## HOW TO START MANUALLY: 
-(TAILS USERS MUST DO THIS EACH TIME YOU REBOOT)
+**(TAILS USERS MUST DO THIS EACH TIME YOU REBOOT)**
+
 1. Right click anywhere on your desktop. On Tails or Ubuntu select "Show Desktop in Files" on Whonix select "Applications" > "File Manager". This will open a file manager window.
 2. In the file manager window, open your MoneroMixer folder then double-click the file named "start" to open it.
 3. In "start" find the line beginning with "Your startup command is:" and copy the whole command from "cd" to "exit".
