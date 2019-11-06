@@ -152,7 +152,7 @@ make_launchers() {
         unset -v term_args
     fi
     
-    echo "
+     echo "
 #######################################################################################
 #   Did you accidently open this file while trying to start MoneroMixer?              
 #   To run MoneroMixer:
