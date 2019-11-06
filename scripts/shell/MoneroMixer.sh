@@ -167,6 +167,8 @@ wallet_options(){
 }
 
 main(){
+    MMPATH="$PWD"
+    trap clean_all_exit SIGINT
     filenames=( "welcome" "mmutils" "error" "settings" "wallet" "wallet_gen" \
                 "exchange" "exchange_menus" "update" "help" "donate" )
 
@@ -174,7 +176,7 @@ main(){
     . scripts/shell/$filename.sh
     done
 
-    trap clean_all_exit SIGINT
+    [ "$USER" = "amnesia" ] && ./scripts/shell/setup.sh launchers
 
     if [ "$1" = "restore" ]; then
         wallet_restore_from_seed
