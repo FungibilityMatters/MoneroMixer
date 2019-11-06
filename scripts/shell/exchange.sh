@@ -86,7 +86,7 @@ a small time span.
     ${YAY}1${WSTD})${STD} Wait at least 1-2 hours before withdrawing through an exchange.\n
     ${YAY}2${WSTD})${STD} Withdraw a much smaller amount than you deposited initially then
        withdraw the rest later.\n
-    ${YAY}3${WSTD})${STD} Spend your Monero directly from $MoneroMixer or withdraw to another wallet."
+    ${YAY}3${WSTD})${STD} Spend your Monero directly from $MoneroMixer or withdraw to another wallet"
 
     if ! zenity --question --ellipsize --title="IMPORTANT: Read this if you care about your privacy" \
                 --text=\
