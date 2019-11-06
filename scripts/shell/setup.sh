@@ -158,8 +158,9 @@ make_launchers() {
 #   To run MoneroMixer:
 #   1. Right click your desktop and select \"Open in Terminal\"
 #   2. Copy and paste your startup command into the terminal window then press ENTER
+#      (Make sure you copy the whole command from \"cd\" to \"exit\") 
 #
-#   Your startup command is: cd \"$MMPATH\" && ./start
+#   Your startup command is: cd \"$MMPATH\" && ./start; exit
 #
 #######################################################################################
 
