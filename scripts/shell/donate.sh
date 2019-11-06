@@ -136,7 +136,7 @@ donation_thank_you() {
     printf "${YAY}Thank you for your donation! Your donation has been sent\nsuccessfully. You are awesome!!"
     zenity --info --ellipsize --icon-name="" --title="Thank You For Your Donation!" \
            --text="Thank you for your donation to help support this project. You are awesome!" \
-           --ok-label="Return to Main Menu"
+           --ok-label="Return to Main Menu" 2> /dev/null
     main_menu
 }
 
