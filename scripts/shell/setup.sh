@@ -135,7 +135,6 @@ move_setup(){
 file_setup() {
     rm -rf .git
     mv README.md info/README.md
-    mkdir icons
     chmod +x scripts/shell/MoneroMixer.sh
 }
 
