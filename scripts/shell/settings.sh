@@ -1,6 +1,6 @@
 #DEFAULT SETTINGS:
 use_default_settings(){
-    daemon="xmrlab.com xmrtolujkxnlinre.onion:18081"
+    daemon="xmrtolujkxnlinre.onion:18081"
     ringsize=11
     priority="normal"
     fiat="USD"
