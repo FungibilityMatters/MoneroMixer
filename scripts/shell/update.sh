@@ -21,10 +21,11 @@ update() {
     printf "Updating MoneroMixer and it's dependencies...
 \n${ERR}(This may take some time. Please wait.)${WSTD}"
 
-    while ! [ -d MoneroMixer ]; do 
-        cd ../
-    done
-
+    #while ! [ -d MoneroMixer ]; do 
+    #    cd ../
+    #done
+    cd "$MMPATH"
+    cd ../
     if ! test -e MoneroMixer_v1.2; then
         mv MoneroMixer MoneroMixer_v1.2 
         printf "\n"
