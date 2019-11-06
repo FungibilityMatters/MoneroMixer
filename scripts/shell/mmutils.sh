@@ -84,12 +84,13 @@ clean_all() {
 
 clean_all_exit() {
     clean_all
-    while ! [ -d scripts -a -d monero-software ]; do 
-        cd ../
-    done
+    #while ! [ -d scripts -a -d monero-software ]; do 
+    #    cd ../
+    #done
+    cd "$MMPATH"
     printf "\n${GRN}Done. Your data is now secure.\n\n"
-    printf "${STD}TO RUN MONEROMIXER AGAIN USE THIS COMMAND IN A NEW TERMINAL:
-${WBU}cd $PWD && ./start\n\n"
+    printf "${STD}TO START MONEROMIXER AGAIN RUN THIS COMMAND IN A NEW TERMINAL:
+${WBU}cd $MMPATH && ./start\n\n"
     read discard
     exit
 }
@@ -122,10 +123,10 @@ resync_prices(){
 
 
 download_new_icons(){
-    while ! [ -d icons ]; do
-        cd ../
-    done
-    cd icons && touch downloaded_icons.txt
+    #while ! [ -d icons ]; do
+    #    cd ../
+    #done
+    cd "$MMPATH/icons" && touch downloaded_icons.txt
 
     torsocks python3 ../scripts/python3/MoneroMixer.py --command "icons" --stdin_bytes 0 \
     | (while read -r icon && [ $icon != "DONE" ]; do
@@ -217,6 +218,3 @@ YAY="\033[01;36;${BG}m"
 GRN="\033[01;32;${BG}m"
 M="\033[0;4;33;${BG}mM${WSTD}"
 MoneroMixer="${M}onero${M}ixer${STD}"
-
-
-
