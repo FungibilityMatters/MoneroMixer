@@ -1,8 +1,6 @@
-
-
 #DEFAULT SETTINGS:
 use_default_settings(){
-    daemon="xmrtolujkxnlinre.onion:18081"
+    daemon="xmrlab.com xmrtolujkxnlinre.onion:18081"
     ringsize=11
     priority="normal"
     fiat="USD"
@@ -71,8 +69,7 @@ set_priority() {
 transaction fee multipliers of x1, x4, x20, and x166, respectively. 
 \n${WBU}The higher you set the priority level the faster your transactions will confirm
 and the higher your fee will be.
-\n${STD}The default priority level used by $MoneroMixer is ${YAY}normal${STD}.
-\n\n"     
+\n${STD}The default priority level used by $MoneroMixer is ${YAY}normal${STD}.\n"     
 
     levels="unimportant slow x1 normal normal x4 elevated fast x20 priority fastest x166" 
     priority=$(zenity --list --height=220 --width=400 \
@@ -136,7 +133,7 @@ set_crypto(){
     printf "${WSTD}Choose a coin to use to determine the crypto value of your ${YAY}XMR${WSTD} balance.${STD}\n\n(The coin you choose will display in your wallet)
 \n${WSTD}The default crypto valuation asset used by $MoneroMixer ${WSTD}is: ${YAY}BTC${STD}\n"
 
-    echo "$PWD" | grep -q "MoneroMixer/wallets" || mkdir cd1 && mkdir cd1/cd2 && cd cd1/cd2
+
     exchange="Godex.io"
     crypto=$(torpydo coins | zenity --list --imagelist --title="Select a coin" \
             --text "Select a coin to use to determine the value of your assets" \
@@ -144,14 +141,14 @@ set_crypto(){
             --print-column=3 2> /dev/null)
     [ -z "$crypto" ] && set_crypto
     printf "\n${STD}Crypto valuation asset set to: ${YAY}$crypto${STD}" && sleep 2
-    echo "$PWD" | grep -q "cd1/cd2" && cd ../../ && rm -rf cd1
+
 }
 
 set_seconds_before_update(){
     seconds_before_update=$(zenity --scale \
                             --title="How many seconds do you want to wait before updating rates?" \
                             --text="Adjust the slider to the number of SECONDS you want to wait before updating rates then click 'Ok'" \
-                            --value=60 --min-value=0 --max-value=600 --step=1 2> /dev/null)
+                            --value=180 --min-value=30 --max-value=600 --step=1 2> /dev/null)
 }
 
 
@@ -170,7 +167,7 @@ default ${MoneroMixer} settings. (Recommended for new users)${STD}
     ${STD}Fiat currency code:                 ${GRN}USD
     ${STD}Fiat currency symbol:               ${GRN}$
     ${STD}Crypto valuation asset:             ${YAY}BTC
-    ${STD}Seconds before updating rates:      ${WBU}60 
+    ${STD}Seconds before updating rates:      ${WBU}180 
 
 ${WSTD}NOTE: You can modify your settings later from the Settings and Utilities Menu." 
 
@@ -227,14 +224,14 @@ settings_menu_options() {
 	case $choice in
         1) set_fiat; torpydo "update" && resync_prices ;;
         2) set_crypto;  torpydo "update" && resync_prices ;;
-		3) set_daemon;;
+	3) set_daemon;;
         4) set_priority;;
         5) set_seconds_before_update;;
         6) confirm_update ;;
         7) wallet_cli ;;
         8) wallet_decrypt_seed ;;
-		9) main_menu ;;
-		*) printf "             ${ERR}Invalid Choice...${STD}" && sleep 2 && $previous_menu
+	9) main_menu ;;
+	*) printf "             ${ERR}Invalid Choice...${STD}" && sleep 2 && $previous_menu
 	esac
     write_settings
     $previous_menu
