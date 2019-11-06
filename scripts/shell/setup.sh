@@ -152,12 +152,17 @@ make_launchers() {
         unset -v term_args
     fi
     
-    echo "#######################################################################################
+    echo "
+#######################################################################################
 #   Did you accidently open this file while trying to start MoneroMixer?              
 #   To run MoneroMixer:
-#   1. Right click the whitespace under the file \"start\" and click \"Open in Terminal\"
-#   2. In the terminal window type \"./start\" then press ENTER
-########################################################################################
+#   1. Right click your desktop and select \"Open in Terminal\"
+#   2. Copy and paste your startup command into the terminal window then press ENTER
+#
+#   Your startup command is: cd \"$MMPATH\" && ./start
+#
+#######################################################################################
+
 ${terminal}${term_args}${mmscript}" > start
     chmod +x start
 
@@ -182,8 +187,8 @@ Exec=${MMPATH}/start" > MoneroMixer.desktop
 if [ -z "$1" ]; then
     . scripts/shell/mmutils.sh
     . scripts/shell/settings.sh
-    file_setup
     check_if_persistent
+    file_setup
     $(download_new_icons &> /dev/null) &
     download_python_dependencies
     download_monero_wallet_cli
@@ -193,6 +198,9 @@ elif [ "$1" = "update" ]; then
     download_python_dependencies
     download_monero_wallet_cli
     file_setup
+    make_launchers
+elif [ "$1" = "launchers" ]; then
+    make_launchers
 else
     read_settings 
     $1
