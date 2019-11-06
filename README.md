@@ -19,9 +19,10 @@ Now all you have to do is follow the prompts within the program and your Monero 
 
 1. Right click anywhere on your desktop. On Tails or Ubuntu select "Show Desktop in Files" on Whonix select "Applications" > "File Manager". This will open a file manager window.
 2. In the file manager window, open your MoneroMixer folder then double-click the file named "start" to open it.
-3. In "start" find the line beginning with "Your startup command is:" and copy the whole command from "cd" to "exit".
+3. In start file find the line beginning with "Your startup command is:". Copy the whole command from "cd" to "exit".
 4. Open a terminal and paste the startup command you copied into the terminal window then press ENTER. 
     (See step 1 above if you forgot how to open a terminal)             
+
 
 ## FAQ:
 
