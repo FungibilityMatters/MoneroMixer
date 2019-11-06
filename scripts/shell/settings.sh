@@ -2,7 +2,7 @@
 
 #DEFAULT SETTINGS:
 use_default_settings(){
-    daemon="zdhkwneu7lfaum2p.onion:18099"
+    daemon="xmrtolujkxnlinre.onion:18081"
     ringsize=11
     priority="normal"
     fiat="USD"
@@ -165,7 +165,7 @@ default ${MoneroMixer} settings. (Recommended for new users)${STD}
 
     ${WBU}Default Settings:                           
 
-    ${STD}Monero daemon address:              ${YAY}zdhkwneu7lfaum2p.onion:18099
+    ${STD}Monero daemon address:              ${YAY}xmrtolujkxnlinre.onion:18081
     ${STD}Transaction priority level:         ${YAY}normal
     ${STD}Fiat currency code:                 ${GRN}USD
     ${STD}Fiat currency symbol:               ${GRN}$
