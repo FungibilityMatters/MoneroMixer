@@ -13,18 +13,12 @@ In the terminal window you will now see that MoneroMixer has begun downloading a
 
 Now all you have to do is follow the prompts within the program and your Monero Wallet will be generated for you. You will be asked for a name and password for your new wallet. 
 
-HOW TO RUN AGAIN AFTER YOUR FIRST TIME:
-
-Tails:
-1. Right click your desktop and select "Open in Terminal"
-2. In the terminal type `cd <path to MoneroMixer>`. For example if MoneroMixer is in your Persistent folder this would look like `cd /home/amnesia/Persistent/MoneroMixer`.
-3. In the terminal type `./start` then press ENTER.
-
-Whonix:
-1. Open the folder called "MoneroMixer" 
-2. Right click and select "Open Terminal Here"
-3. In the terminal type `./start` then press ENTER.
-    
+HOW TO START MANUALLY (TAILS USERS MUST DO THIS EACH TIME YOU REBOOT):
+1. Right click anywhere on your desktop. On Tails or Ubuntu select "Show Desktop in Files" on Whonix select "Applications" > "File Manager". This will open a file manager window.
+2. In the file manager window, open your MoneroMixer folder then double-click the file named "start" to open it.
+3. In "start" find the line beginning with "Your startup command is:" and copy the whole command from "cd" to "exit".
+4. Open a terminal and paste the startup command you copied into the terminal window then press ENTER. 
+    (See step 1 above if you forgot how to open a terminal)             
 
 FAQ:
 
