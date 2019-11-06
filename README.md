@@ -7,7 +7,7 @@
 
 `cd "$(zenity --file-selection --title="Select folder where you would like to install MoneroMixer" --directory 2> /dev/null)" && ([ "$USER" = "amnesia" ] || sudo -p " Enter password for $USER to begin downloading MoneroMixer: " apt update 2> /dev/null) && (([ "$USER" = "amnesia" ] || sudo apt -y install git zenity python3-pip tor 2> /dev/null) && torsocks git clone https://github.com/FungibilityMatters/MoneroMixer) | (zenity --progress --title="Downloading MoneroMixer" --text="Please wait. MoneroMixer will start automatically once finished..." --pulsate --auto-close --auto-kill 2> /dev/null) && cd MoneroMixer && chmod +x scripts/shell/setup.sh && ./scripts/shell/setup.sh; exit`
 
-3. Select the location when you would like to install MoneroMixer, then click "Ok".
+3. Select the folder where you would like to install MoneroMixer, then click "Ok".
 4. If you are NOT using Tails, you will be asked for your password before the download begins. (Tails users can ignore this step)
 5. Wait for the download and installation to complete. MoneroMixer will start automatically once finished.  
 
