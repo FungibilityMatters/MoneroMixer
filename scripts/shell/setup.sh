@@ -6,7 +6,7 @@ download_monero_wallet_cli(){
     test -d monero-software || mkdir monero-software
     cd monero-software
 
-    torsocks wget https://dlsrc.getmonero.org/cli/monero-linux-x64-v0.14.1.2.tar.bz2 \
+    torsocks wget https://dlsrc.getmonero.org/cli/monero-linux-x64-v0.15.0.0.tar.bz2 \
     --show-progress \
     --secure-protocol="TLSv1_2" \
     --user-agent "$ua" \
@@ -19,7 +19,7 @@ Please wait. MoneroMixer will start automatically once finished..." \
 
     test -e linux64 || failed_monero_wallet_cli
     read -ra cli_hash <<< $(openssl sha256 linux64)
-    if test "${cli_hash[1]}" = "a4d1ddb9a6f36fcb985a3c07101756f544a5c9f797edd0885dab4a9de27a6228" 
+    if test "${cli_hash[1]}" = " 53d9da55137f83b1e7571aef090b0784d9f04a980115b5c391455374729393f3" 
     then 
         unzip_monero_wallet_cli
     else
@@ -31,7 +31,7 @@ The SHA256 hash of the linux64 Monero CLI tools just downloaded are:
 ${cli_hash[1]}
 
 Which is different from the SHA256 hash posted on getmonero.org:
-a4d1ddb9a6f36fcb985a3c07101756f544a5c9f797edd0885dab4a9de27a6228
+53d9da55137f83b1e7571aef090b0784d9f04a980115b5c391455374729393f3
    
 You may be affected by an MITM (Man-in-the-middle) attack and should install the Monero software manually to ensure your security.
 
