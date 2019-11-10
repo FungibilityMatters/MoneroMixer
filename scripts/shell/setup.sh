@@ -19,7 +19,7 @@ Please wait. MoneroMixer will start automatically once finished..." \
 
     test -e linux64 || failed_monero_wallet_cli
     read -ra cli_hash <<< $(openssl sha256 linux64)
-    if test "${cli_hash[1]}" = " 53d9da55137f83b1e7571aef090b0784d9f04a980115b5c391455374729393f3" 
+    if test "${cli_hash[1]}" = "53d9da55137f83b1e7571aef090b0784d9f04a980115b5c391455374729393f3" 
     then 
         unzip_monero_wallet_cli
     else
