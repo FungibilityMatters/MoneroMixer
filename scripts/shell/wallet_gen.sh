@@ -1,5 +1,4 @@
 wallet_set_login(){
-    previous_menu=wallet_set_login
     title
     printf "To begin enter a ${YAY}name${STD} and ${YAY}password${STD} for your new Monero wallet. [${ERR}BOTH 1 WORD MAX${STD}]\n"
 
@@ -20,7 +19,7 @@ wallet_set_login(){
         cd "$name"
     else
         zerror "Error: $name already exits" "Error: A wallet named $name already exists.\nTry again with another name."
-        $previous_menu
+        wallet_set_login
     fi
 }
 
@@ -30,7 +29,7 @@ gen_wallet_and_seed_file() {
     [ -e settings ] || setup_choice
     read_settings
 
-    $previous_menu="gen_wallet_and_seed_file"
+    #$previous_menu="gen_wallet_and_seed_file"
     title
     printf "${YAY}Generating your Monero wallet...\n${STD}
 ${STD}Wallet name set to: '${YAY}$name${STD}'
