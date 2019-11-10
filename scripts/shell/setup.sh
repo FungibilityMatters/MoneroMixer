@@ -17,9 +17,9 @@ download_monero_wallet_cli(){
 Please wait. MoneroMixer will start automatically once finished..." \
                                     --pulsate --auto-close --auto-kill 2> /dev/null)
 
-    test -e linux64 || failed_monero_wallet_cli
+    [ -e linux64 ] || failed_monero_wallet_cli
     read -ra cli_hash <<< $(openssl sha256 linux64)
-    if test "${cli_hash[1]}" = "53d9da55137f83b1e7571aef090b0784d9f04a980115b5c391455374729393f3" 
+    if [ "${cli_hash[1]}" = "53d9da55137f83b1e7571aef090b0784d9f04a980115b5c391455374729393f3" ]
     then 
         unzip_monero_wallet_cli
     else
@@ -41,7 +41,7 @@ The potentially compromised software will be destroyed unless you select continu
         then 
             manual_monero_wallet_cli   
         else
-            unzip_monero_wallet_cli     
+            unzip_monero_wallet_cli   
         fi 
     fi
     cd ../
@@ -49,8 +49,8 @@ The potentially compromised software will be destroyed unless you select continu
 }
 
 unzip_monero_wallet_cli(){
-    tar -xzf linux64
-    mv monero-x86_64-linux-gnu/monero-wallet-cli monero-wallet-cli
+    tar -xf linux64
+    mv monero-x86_64-linux-gnu-v0.15.0.0/monero-wallet-cli monero-wallet-cli
     chmod +x monero-wallet-cli
 }
 
