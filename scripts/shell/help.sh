@@ -13,7 +13,7 @@ help_menu() {
 	(${YAY}3${WSTD}) ${STD}I need a refresher on how to use $MoneroMixer${WSTD}
 
 	(${YAY}4${WSTD}) ${STD}View Advanced Info (Stuff for nerds)${WSTD}
-	(${YAY}5${WSTD}) ${STD}Return to Main Menu${STD}" 
+	(${YAY}5${WSTD}) ${STD}Return to Main Menu${STD}\n" 
     help_menu_options
 }
 
