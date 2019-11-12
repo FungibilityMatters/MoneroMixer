@@ -19,7 +19,7 @@ help_menu() {
 
 help_menu_options() {
     local choice
-    printf "\nEnter ${WSTD}choice${STD} [${YAY}1${STD} - ${YAY}5${STD}]:${YAY} "
+    printf "\n			Enter ${WSTD}choice${STD} [${YAY}1${STD} - ${YAY}5${STD}]:${YAY} "
     read -r choice
 	case $choice in
 		1) help_menu_selector ;;
