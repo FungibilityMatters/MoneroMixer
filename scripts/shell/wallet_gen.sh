@@ -42,8 +42,25 @@ ${STD}Wallet name set to: '${YAY}$name${STD}'
     --mnemonic-language English <<<"$password" | encrypt wallet-cli-out.enc ) \
     | zprog "Generating your Monero wallet" "Generating wallet: $name..."
     wallet_display_seed
-    #backup_seed
+    
+    title
+    printf "${YAY}Initializing your Monero wallet...n${STD}
+${ERR}(This may take some time. Please wait.)
+ ${STD}"
+    shred -u "$name" "$name.keys"
+    declare -a seed
+    readarray -n 24 seed <<<$(decrypt wallet-cli-out.enc)
+    
+    (echo "${seed[20]}${seed[21]}${seed[22]}
+" | torsocks ../../monero-software/monero-wallet-cli 
+                     --restore-deterministic-wallet 
+                     --restore-date=$(printf '%(%Y-%m-%d)Tn' -1) 
+                     --daemon-address $daemon 
+                     --generate-new-wallet "$name" 
+                     --password "$password" | encrypt wallet-cli-out.enc)
+    | $(zprog "Initializing your Monero wallet" "Initializing wallet: $name...n(This may take some time. Please wait.)")
 }
+
 
 wallet_display_seed(){
     declare -a seed
