@@ -44,7 +44,7 @@ ${STD}Wallet name set to: '${YAY}$name${STD}'
     wallet_display_seed
     
     title
-    printf "${YAY}Initializing your Monero wallet...n${STD}
+    printf "${YAY}Initializing your Monero wallet...\n${STD}
 ${ERR}(This may take some time. Please wait.)
  ${STD}"
     shred -u "$name" "$name.keys"
