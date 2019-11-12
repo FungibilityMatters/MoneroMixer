@@ -54,7 +54,7 @@ ${ERR}(This may take some time. Please wait.)
     (echo "${seed[20]}${seed[21]}${seed[22]}
 " | torsocks ../../monero-software/monero-wallet-cli \
                      --restore-deterministic-wallet \
-                     --restore-date=$(printf '%(%Y-%m-%d)Tn' -1) \
+                     --restore-date=$(printf '%(%Y-%m-%d)T' -1) \
                      --daemon-address $daemon \
                      --generate-new-wallet "$name" \
                      --password "$password" | encrypt wallet-cli-out.enc) \
