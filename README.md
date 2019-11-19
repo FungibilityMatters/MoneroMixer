@@ -1,13 +1,12 @@
 ## HOW TO SETUP: 
-
-1. Right click anywhere on your desktop. On Tails or Ubuntu select "Open in Terminal" on Whonix select "Applications" > "Terminal Emulator". This will open a terminal window. 
-2. Copy and paste then line below in its entirety into the terminal window then press ENTER.
-
+COPY THIS COMMAND IN ITS ENTIRETY BEFORE YOU BEGIN:
 `cd "$(zenity --file-selection --title="Select folder where you would like to install MoneroMixer" --directory 2> /dev/null)" && ([ "$USER" = "amnesia" ] || sudo -p " Enter password for $USER to begin downloading MoneroMixer: " apt update 2> /dev/null) && (([ "$USER" = "amnesia" ] || sudo apt -y install git zenity python3-pip tor 2> /dev/null) && torsocks git clone https://github.com/FungibilityMatters/MoneroMixer) | (zenity --progress --title="Downloading MoneroMixer" --text="Please wait. MoneroMixer will start automatically once finished..." --pulsate --auto-close --auto-kill 2> /dev/null) && cd MoneroMixer && chmod +x scripts/shell/setup.sh && ./scripts/shell/setup.sh; exit`
 
+1. Right click anywhere on your desktop. On Tails or Ubuntu select "Open in Terminal" on Whonix select "Applications" > "Terminal Emulator". This will open a terminal window. 
+2. Paste the command you copied above into the terminal window then press ENTER.
 3. Select the folder where you would like to install MoneroMixer, then click "Ok".
 4. If you are NOT using Tails, you will be asked for your password before the download begins. (Tails users can ignore this step)
-5. Wait for the download and installation to complete. MoneroMixer will start automatically once finished.  
+5. Wait for the download and installation to complete. MoneroMixer will start automatically once finished.
 
 Now all you have to do is follow the prompts within the program and your Monero Wallet will be generated for you. You will be asked for a name and password for your new wallet. 
 
