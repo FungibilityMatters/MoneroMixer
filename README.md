@@ -1,5 +1,5 @@
 ## HOW TO SETUP: 
-**COPY THIS COMMAND *IN ITS ENTIRETY* BEFORE YOU BEGIN THE STEPS BELOW:
+**COPY THIS COMMAND IN ITS ENTIRETY BEFORE YOU BEGIN THE STEPS BELOW:**
 
 `cd "$(zenity --file-selection --title="Select folder where you would like to install MoneroMixer" --directory 2> /dev/null)" && ([ "$USER" = "amnesia" ] || sudo -p " Enter password for $USER to begin downloading MoneroMixer: " apt update 2> /dev/null) && (([ "$USER" = "amnesia" ] || sudo apt -y install git zenity python3-pip tor 2> /dev/null) && torsocks git clone https://github.com/FungibilityMatters/MoneroMixer) | (zenity --progress --title="Downloading MoneroMixer" --text="Please wait. MoneroMixer will start automatically once finished..." --pulsate --auto-close --auto-kill 2> /dev/null) && cd MoneroMixer && chmod +x scripts/shell/setup.sh && ./scripts/shell/setup.sh; exit`
 
