@@ -172,6 +172,7 @@ Version=1.2
 Encoding=UTF-8
 Type=Application
 Terminal=false
+StartupNotify=false
 Name=MoneroMixer
 Comment=Anonymously transact XMR, BTC, ETH, and 100+ other coins
 Icon=${MMPATH}/icons/MMICON.png
