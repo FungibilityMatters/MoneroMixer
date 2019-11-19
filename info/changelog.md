@@ -8,7 +8,7 @@
 - XMR Transaction History: Users can now open window a that shows their complete XMR transaction history in a nicely formatted table. This requires a password and can be accessed via Wallet Options.
 - Restore/Import: Users can now easily restore or import existing wallet's from seed. This option is available from the login screen.
 - Background Updates: Current exchange rates and coin availabilty are now updated in the background so user's no longer have to wait for menu's to load. The amount of time between updates is can be changed from the settings and utilities menu. 
-
+- Resizable Rate Tables: Users can now expand their window size to view more accurate details when comparing exchanges. (The wider the window, the more decimal places display)
 
 **UI/UX Simplifications:**
 - Application Launchers: Launchers are now created on a user's desktop and in Applications > Internet so that starting MoneroMixer no longer requires a terminal. 
