@@ -1,6 +1,6 @@
 import requests
 import sys
-from random import randint
+from random import choice
 from re import match as rematch
 from time import time
 from json import loads as json
@@ -16,7 +16,7 @@ class FakeUARequests(object):
             header = {
                            "Accept":"application/json", 
                            "Content-Type":"application/json",
-                           "User-Agent": all_user_agents[randint(0, len(all_user_agents))].strip(),
+                           "User-Agent": choice(all_user_agents).strip(),
                           }
             break
         except IOError:
@@ -68,9 +68,6 @@ class Updater(object):
           
         with open(filename, 'wb') as f:
             copyfileobj(response.raw, f)
-        #if filename == "XMR.png":
-        #    img = Image.open(filename)
-        #    img.save("MMICON.png")
         if ".svg" not in filename:
             img = Image.open(filename).resize((25,25))
             img.save(filename.replace(filename.split(".")[1], "png"))
