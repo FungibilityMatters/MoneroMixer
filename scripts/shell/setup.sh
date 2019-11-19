@@ -133,8 +133,9 @@ move_setup(){
 
 
 file_setup() {
-    rm -rf .git
+    rm -rf .git _config.yml
     mv README.md info/README.md
+    mv LICENSE info/LICENSE
     chmod +x scripts/shell/MoneroMixer.sh
 }
 
