@@ -57,14 +57,14 @@ find_all_wallets(){
         unset_IFS
     done
     echo "Create new wallet"
-    #echo "Restore wallet from seed"
+    echo "Restore/Import wallet from seed"
 }
 
 wallet_login(){
     title
     name=$(find_all_wallets | zenity --list --modal \
-                                     --title="Login to MoneroMixer" \
-                                     --text="Select a Monero wallet to login with." \
+                                     --title="$1 to MoneroMixer" \
+                                     --text="$2 a Monero wallet to login with." \
                                      --column="wallets" \
                                      --ok-label="Continue" \
                                      --hide-header 2> /dev/null )
@@ -72,8 +72,8 @@ wallet_login(){
 
     if [ "$name" = "Create new wallet" ]; then
         gen_wallet_and_seed_file
-    elif [ "$name" = "Restore wallet from seed" ]; then
-        wallet_restore_from_seed    
+    elif [ "$name" = "Restore/Import wallet from seed" ]; then
+        wallet_restore_from_seed
     else
         cd "$name" || clean_all_exit 
         read_settings
@@ -343,4 +343,3 @@ wallet_decrypt_seed() {
            --filename <(decrypt ${seedfile}.enc) 2> /dev/null
     $previous_menu
 }
-
