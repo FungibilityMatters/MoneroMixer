@@ -1,8 +1,13 @@
 # Changelog
 ## Update v1.2:
-**New Features:**
 
-**UI Simplifications:**
+**New Features:**
+- BitPay: Users can now anonymously pay BitPay (BTC) Payment Protocol URL invoices with XMR.to. This feature can be accessed from the XMR.to menu.
+- Support for coins with extra ids: Dual QRCodes and additional extry boxes allow users to now transact coins that require extra indentifiers for transaction processing such as XRP destination tags or EOS memos. 
+- XMR QRCodes: When a user views their current Monero receiving address they are now shown both a QRCode and a string of the address. This is to make it easier for users with mobile wallets such as CakeWallet to easily deposit XMR.
+- XMR transaction history: Users can now open window a that shows their complete XMR transaction history in a nicely formatted table. This requires a password and can be accessed via Wallet Options. 
+
+**UI/UX Simplifications:**
 
 **Security Improvements:**
 - All sensitive user data that is either created or decrypted now gets piped directly through openssl's aes-256-cbc encryption cipher before it is written so that no sensitive data is ever stored in disk memory. (Decrypted data does exist in RAM for a short period of time but this is unavoidable since encrypted data must be decrypted in RAM so that it can be used.)
