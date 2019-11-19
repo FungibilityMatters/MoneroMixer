@@ -1,10 +1,10 @@
-## Changelog
-**Update v1.2:**
-New Features:
+# Changelog
+## Update v1.2:
+**New Features:**
 
-UI Simplifications:
+**UI Simplifications:**
 
-Security Improvements:
+**Security Improvements:**
 - All sensitive user data that is either created or decrypted now gets piped directly through openssl's aes-256-cbc encryption cipher before it is written so that no sensitive data is ever stored in disk memory. (Decrypted data does exist in RAM for a short period of time but this is unavoidable since encrypted data must be decrypted in RAM so that it can be used.)
 - Monero wallet passwords, addresses, amounts, etc are now passed to monero-wallet-cli via here string redirection rather than command line arguements so that nothing is visible locally to ps.
 - Fake user-agents, secure protocol TLSv1.2, and redirect blocking are now used to improve the security of the wget request that downloads the monero software from getmonero.org. This is to reduce traceablilty and to prevent MITM attacks. 
@@ -13,12 +13,12 @@ Security Improvements:
 - Quitting with CTRL-C is no longered required to exit securely since all data is encryped or shredded automatically.
 
 
-Structural Changes: 
+**Structural Changes:**
 
 
-Bug Fixes:
+**Bug Fixes:**
 
-**Update v1.1:**
+## Update v1.1:
 - Easy (Automatic) setup now works on Whonix, and Ubuntu! Users on (almost) all 64bit systems, can now easily setup MoneroMixer and create a wallet by simply copy and pasting a line of code. Just like on Tails as shown in the video on my original post.
 - All python requests now include a randomly selected user agent in their header, allow_redirects is set to false, and timeout after 30 seconds per the suggestions of /u/dsc__
 - An update utility is now available in the utilities menu so user's can update their MoneroMixer and monero-wallet-cli software to the lastest version without having to manually copy over pre-existing wallets. The update feature must be manually selected by the user so that this feature can never be used to update a user's MoneroMixer setup with malicious code.
