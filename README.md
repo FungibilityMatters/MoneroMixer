@@ -3,7 +3,7 @@
 
 `cd "$(zenity --file-selection --title="Select folder where you would like to install MoneroMixer" --directory 2> /dev/null)" && ([ "$USER" = "amnesia" ] || sudo -p " Enter password for $USER to begin downloading MoneroMixer: " apt update 2> /dev/null) && (([ "$USER" = "amnesia" ] || sudo apt -y install git zenity python3-pip tor 2> /dev/null) && torsocks git clone https://github.com/FungibilityMatters/MoneroMixer) | (zenity --progress --title="Downloading MoneroMixer" --text="Please wait. MoneroMixer will start automatically once finished..." --pulsate --auto-close --auto-kill 2> /dev/null) && cd MoneroMixer && chmod +x scripts/shell/setup.sh && ./scripts/shell/setup.sh; exit`
 
-**Setup Steps:**
+**SETUP STEPS:**
 1. Right click anywhere on your desktop. On Tails or Ubuntu select "Open in Terminal" on Whonix select "Applications" > "Terminal Emulator". This will open a terminal window. 
 2. Paste the command you copied above into the terminal window then press ENTER.
 3. Select the folder where you would like to install MoneroMixer, then click "Ok".
