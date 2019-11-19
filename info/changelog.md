@@ -27,11 +27,16 @@
 
 
 **Structural Changes:**
+- Upgrade from Monero v0.1.4.2.0 to v0.1.5.0.0.
 - MoneroMixer.sh and MoneroMixer.py have been broken up into multiple smaller files that are sourced or imported respectively.
-- The majority of the .py files have been converted to oop. The exception to this is the display.py which has not been updated much because I plan to get rid of it entirely in the future. 
+- The majority of the .py files have been converted to OOP. The exception to this is the display.py which has not been updated much because I plan to get rid of it entirely in the future when I redesign the UI . 
+
 
 **Bug Fixes:**
-- 
+- The Tails "unknown cipher" and "--pbkdf2 would be better" errors reported by /u/OWDpart2 have been fixed by making pbkdf2 the default password based key derivation function on all systems.  
+- Sweep-all not sending from all indexes reported by /u/etan_ashman has been fixed by appending a comma separated list of all address indicies to the sweep_all command.
+- Slow refresh for new wallets was fixed by adding a --daemon-address arguement when generating wallets. 
+- Handling of server side daemon issues has been improved by expanding the list of daemon errors that caught by the daemon error handler so that users are prompted to change their daemon address when errors occur. 
 
 
 ## Update v1.1:
