@@ -186,11 +186,13 @@ main(){
             disclaimer
             #setup_choice
             mkdir wallets && cd wallets
-            gen_wallet_and_seed_file
+            #gen_wallet_and_seed_file
+            wallet_login "Welcome" "Create or import"
         else
-            cd wallets
-            wallet_login
+            cd wallets 
+            wallet_login "Login" "Select"
         fi
+        
         start_background_updates &
         test -n "$1" && $1
         fi
