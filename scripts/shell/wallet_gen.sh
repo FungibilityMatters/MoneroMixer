@@ -1,12 +1,12 @@
 wallet_set_login(){
     title
-    printf "To begin enter a ${YAY}name${STD} and ${YAY}password${STD} for your new Monero wallet. [${ERR}BOTH 1 WORD MAX${STD}]\n"
+    printf "$1"
 
     set_IFS "|"
     read -r name password <<<$(zenity --forms --icon-name="dialog-password" \
-                               --title "Create a new Monero wallet" \
-                               --text="Set a name and password for your new Monero Wallet" \
-                               --add-entry="Wallet name:" --add-password="Password:"  \
+                               --title="$2" --text="$3" \
+                               --add-entry="Wallet name:" \
+                               --add-password="Password:"  \
                                --timeout 200 2> /dev/null)
     unset_IFS
 
@@ -19,12 +19,16 @@ wallet_set_login(){
         cd "$name"
     else
         zerror "Error: $name already exits" "Error: A wallet named $name already exists.\nTry again with another name."
-        wallet_set_login
+        wallet_set_login "$1" "$2" "$3"
     fi
 }
 
 gen_wallet_and_seed_file() {
-    wallet_set_login
+    wallet_set_login "To begin enter a ${YAY}name${STD} and ${YAY}password${STD} for your new Monero wallet. [${ERR}BOTH 1 WORD MAX${STD}]\n" \
+    "Create a new Monero wallet" \
+    "Set a name and password for your new Monero Wallet"
+    
+    
     [ -e ../../settings ] && mv ../../settings settings || echo " "
     [ -e settings ] || setup_choice
     read_settings
@@ -38,27 +42,10 @@ ${STD}Wallet name set to: '${YAY}$name${STD}'
  ${STD}"
 
     $(torsocks ../../monero-software/monero-wallet-cli \
-    --generate-new-wallet "$name" \
+    --generate-new-wallet "$name" --daemon-address $daemon --no-dns \
     --mnemonic-language English <<<"$password" | encrypt wallet-cli-out.enc ) \
     | zprog "Generating your Monero wallet" "Generating wallet: $name..."
     wallet_display_seed
-    
-    title
-    printf "${YAY}Initializing your Monero wallet...\n${STD}
-${ERR}(This may take some time. Please wait.)
- ${STD}"
-    shred -u "$name" "$name.keys"
-    declare -a seed
-    readarray -n 24 seed <<<$(decrypt wallet-cli-out.enc)
-    
-    (echo "${seed[20]}${seed[21]}${seed[22]}
-" | torsocks ../../monero-software/monero-wallet-cli \
-                     --restore-deterministic-wallet \
-                     --restore-date=$(printf '%(%Y-%m-%d)T' -1) \
-                     --daemon-address $daemon \
-                     --generate-new-wallet "$name" \
-                     --password "$password" | encrypt wallet-cli-out.enc) \
-    | zprog "Initializing your Monero wallet" "Initializing wallet: $name...n(This may take some time. Please wait.)"
 }
 
 
@@ -84,8 +71,7 @@ THIS IS EXTREMELY IMPORTANT. ONLY CONTINUE IF YOU HAVE WRITTEN DOWN YOUR SEED.${
     echo "The following mnemonic seed was used to generate: $name
 ****************************************************************
 ${seed[20]}${seed[21]}${seed[22]}****************************************************************
-To copy your seed highlight it then right click and select 'Copy'. 
-DO NOT attempt to use CTRL-C to copy your seed. 
+Creation date: $(date)
 
 IMPORTANT: these 25 words can be used to recover access to your wallet. 
 Write them down and store them somewhere safe and secure." | encrypt ${seedfile}.enc
@@ -123,62 +109,48 @@ NOTE: ${seedfile}.enc is encrypted so you will not be able to read it unless you
 
 #not currently implemented
 wallet_restore_from_seed(){
-    title
     previous_menu="clean_all_exit"
-    set_IFS "|"
+    wallet_set_login "Enter a new ${YAY}name${STD} and ${YAY}password${STD} the Monero Wallet you would like to restore.
+\n${WBU}You will need to enter your 25 word mnemonic seed in the next step." \
+    "Restore a wallet from seed"\
+    "Enter a new name and password the Monero Wallet you would like to restore.
+\nYou will need to enter your 25 word mnemonic seed in the next step."
+    
+    use_default_settings
+    write_settings
 
-    credentials_in=$(zenity --icon-name='dialog-password' --forms \
-                            --title "Restore a wallet from seed" \
-                            --text="Enter a new name and password the Monero Wallet you would like to restore.
-\nYou will need to enter your 25 word seed in the next step." \
-                            --add-entry="Wallet name:" \
-                            --add-password="New password:"  \
-                            --timeout 200 2> /dev/null)
+    seed=$(zenity --text-info \
+           --title="Enter your 25 word mnemonic seed to restore your wallet" \
+           --ok-label="Restore wallet from this seed" \
+           --editable 2> /dev/null)
+    [ -z "$seed" ] && clean_all_exit
 
-    [ -z "$credentials_in" ] && clean_all_exit
-    [ "$credentials_in" = "|" ] && clean_all_exit 
-    read -ra credentials <<< ${credentials_in}
-    name="${credentials[0]}"
-    password="${credentials[1]}"
-    unset_IFS
+    restore_date=$(zenity --calendar \
+                    --title="Select the date when you first created $name" \
+                    --text="This date will be used to determine the block height to restore your wallet from.\n\nNOTE: If you cannot remember the date exactly,\nchoose a date EARLIER than you think to insure that all your coins are resored\n" \
+                    --date-format='%Y-%m-%d' 2> /dev/null)
+    [ -z "$restore_date" ] && clean_all_exit
 
-    [ -z "$name" ] && required_error "name for wallet to be restored"
-    [ -z "$password" ] && required_error "new password for wallet to be restored"
-
-    [ -d "$name" ] || mkdir $name
-    cd "$name" || clean_all_exit
-
-    seed="$(zenity --text-info \
-                  --title="Enter your 25 word mnemonic seed to restore your wallet" \
-                  --ok-label="Restore wallet from this seed" --editable 2> /dev/null)"
-    (echo "$seed
-" | torsocks ../../monero-software/monero-wallet-cli \
+    title
+    printf "${YAY}Restoring $name from seed...\n
+${WBU}Once completed this window will close and you will be asked to login."
+    (torsocks ../../monero-software/monero-wallet-cli \
                      --restore-deterministic-wallet \
+                     --restore-date=$restore_date \
+                     --daemon-address $daemon \
                      --generate-new-wallet "$name" \
-                     --password "$password" | encrypt wallet-cli-out.enc)\
+                     --password "$password" <<<"$seed
+"   | encrypt wallet-cli-out.enc) \
     | $(zprog "Restoring your Monero wallet" "Restoring wallet: $name...")
-
-
-    while ! test -d wallets
-    do
-            cd ../
-    done
-
-    if ! [ -e wallets/$name/$name.keys ]; then 
-        rm -rf "wallets/$name" && zerror "Error: the seed you entered is not valid" "Error: the seed you entered is not valid. Try again."
+    
+    cd "$MMPATH"
+    if [ -e "wallets/$name/$name.keys" ]; then  
+        zenity --notification \
+               --text="$name has been succesfully restored!" 2> /dev/null
     else
-        zenity --info --ellipsize --title="$name has been succesfully restored!" \
-               --text="$name has been succesfully restored!
-
-IMPORTANT: You will see that your wallet is '(out of sync)' are your balance may not show up initially.
-\nYou will now be taken to the Monero wallet CLI to restore your coins with the following steps:
-    1. Wait for the Monero wallet CLI to load.
-    2. Type 'refresh' then press ENTER until you do not see '(out of sync)'.
-    3. It may take a few times before your balance has fully synced.
-    4. Type 'exit' then close the terminal and open a new window before using MoneroMixer.
-" 2> /dev/null
-        #cd wallets/"$name"
-        #wallet_cli 
+        rm -rf "wallets/$name"
+        zerror "Error: the seed you entered is not valid" "Error: the seed you entered is not valid. Try again."
     fi
-  
+    ./start
+    exit
 }
