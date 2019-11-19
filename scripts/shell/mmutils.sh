@@ -91,16 +91,16 @@ clean_all_exit() {
     printf "${GRN}Done. Your data is now secure.\n\n"
     printf "${WBU}HOW TO RESTART $MoneroMixer:\n
 ${WBU}Method 1:${STD} Go to Applications > Internet > MoneroMixer.\n
-${WBU}Method 2:${STD} Go to your desktop and right click MoneroMixer.desktop. \nSelect 'Allow launching' then double click the MoneroMixer logo.\n 
+${WBU}Method 2:${STD} Go to your desktop and right click MoneroMixer.desktop. \nSelect 'Allow launching' then double click the MoneroMixer icon.\n 
 ${WBU}Method 3:${STD} Paste your startup command into a new terminal then press ENTER.\n
 ${WBU}Your startup command is:\n${GRN}cd \"$MMPATH\"; ./start\n\n"
 
     if zenity --question --ellipsize --title="How to restart MoneroMixer" \
            --text="Method 1: Go to Applications > Internet > MoneroMixer.\n
-Method 2: Go to your desktop and right click MoneroMixer.desktop. \nSelect 'Allow launching' then double click the MoneroMixer logo.\n 
+Method 2: Go to your desktop and right click MoneroMixer.desktop. \nSelect 'Allow launching' then double click the MoneroMixer icon.\n 
 Method 3: Paste your startup command into a new terminal then press ENTER.\n
 Your startup command is:\ncd \"$MMPATH\"; ./start\n\n"\
-            --ok-label="Restart MoneroMixer now"\
+            --ok-label="Restart MoneroMixer now" \
             --cancel-label="Quit and close windows" --icon-name=info;
     then
         ./start
