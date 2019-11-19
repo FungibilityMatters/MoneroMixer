@@ -75,8 +75,7 @@ withdrawals from the corresponding menus.
 ${STD}
 ${STD}Make sure you ${WBU}read the instructions carefully${STD} and follow the prompts.
 
-${WBU}NOTE: To quit securely press ${YAY}CTRL-C${WBU} at any time or select 
-option ${YAY}8${WBU} 'Quit' from the main menu."
+${WBU}NOTE: To quit securely press ${YAY}CTRL-C${WBU} at any time or select main menu option ${YAY}8${WBU}."
 
     zenity --info --ellipsize --icon-name="dialog-warning" \
     --title="IMPORTANT: Read this if you care about your privacy" \
