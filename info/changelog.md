@@ -1,13 +1,21 @@
-# Changelog
+# MoneroMixer Changelog
 ## Update v1.2:
 
 **New Features:**
 - BitPay: Users can now anonymously pay BitPay (BTC) Payment Protocol URL invoices with XMR.to. This feature can be accessed from the XMR.to menu.
-- Support for coins with extra ids: Dual QRCodes and additional extry boxes allow users to now transact coins that require extra indentifiers for transaction processing such as XRP destination tags or EOS memos. 
+- Extra Id Support: Dual QRCodes and additional extry boxes allow users to now transact coins that require extra indentifiers for transaction processing such as XRP destination tags or EOS memos. 
 - XMR QRCodes: When a user views their current Monero receiving address they are now shown both a QRCode and a string of the address. This is to make it easier for users with mobile wallets such as CakeWallet to easily deposit XMR.
-- XMR transaction history: Users can now open window a that shows their complete XMR transaction history in a nicely formatted table. This requires a password and can be accessed via Wallet Options. 
+- XMR Transaction History: Users can now open window a that shows their complete XMR transaction history in a nicely formatted table. This requires a password and can be accessed via Wallet Options.
+- Restore/Import: Users can now easily restore or import existing wallet's from seed. This option is available from the login screen.
+- Background Updates: Current exchange rates and coin availabilty are now updated in the background so user's no longer have to wait for menu's to load. The amount of time between updates is customizable. 
+
 
 **UI/UX Simplifications:**
+- Application Launchers: Launchers are now created on a user's desktop and in Applications > Internet so that starting MoneroMixer no longer requires a terminal. 
+- Icons: When viewing lists of available coins, each coin's icon is shown next to it in the list. MoneroMixer also now has it's own custom icon. 
+- Improved navagation: Additional buttons have been added throughout the UI to simply the process of switching between screens/menus.  
+- Simplified Setup: The installation and setup process has been simplified significantly.
+- Seed Confirmation: User's must now check a box confirming that they have written down their seed before being able to continue.  
 
 **Security Improvements:**
 - All sensitive user data that is either created or decrypted now gets piped directly through openssl's aes-256-cbc encryption cipher before it is written so that no sensitive data is ever stored in disk memory. (Decrypted data does exist in RAM for a short period of time but this is unavoidable since encrypted data must be decrypted in RAM so that it can be used.)
@@ -19,9 +27,12 @@
 
 
 **Structural Changes:**
-
+- MoneroMixer.sh and MoneroMixer.py have been broken up into multiple smaller files that are sourced or imported respectively.
+- The majority of the .py files have been converted to oop. The exception to this is the display.py which has not been updated much because I plan to get rid of it entirely in the future. 
 
 **Bug Fixes:**
+- 
+
 
 ## Update v1.1:
 - Easy (Automatic) setup now works on Whonix, and Ubuntu! Users on (almost) all 64bit systems, can now easily setup MoneroMixer and create a wallet by simply copy and pasting a line of code. Just like on Tails as shown in the video on my original post.
