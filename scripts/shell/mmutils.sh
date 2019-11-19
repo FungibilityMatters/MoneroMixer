@@ -48,6 +48,7 @@ decrypt(){
     openssl enc -d -aes-256-cbc -pbkdf2 -salt -kfile <(echo ${password}) -in $1
 }
 
+
 append_encrypted_id(){
     encrypt newID.enc
     [ -e $1 ] || touch $1
@@ -65,8 +66,6 @@ degrept(){
 
 #CLEANING FUNCTIONS
 clean_all() {
-    title
-    printf "${STD}Encrypting and shredding all data before exiting...\n"
     [ -e updates ] && rm -rf updates
     [ -e wallet-cli-out.enc ] && shred -u wallet-cli-out.enc
     [ -e py_error ] && shred -u py_error
@@ -80,22 +79,38 @@ clean_all() {
     [ -e ../scripts/python3/__pycache__ ] && rm -rf ../scripts/python3/__pycache__
     [ -e ../../scripts/python3/__pycache__ ] && rm -rf ../../scripts/python3/__pycache__
     $(kill %1 %2 %3 &> /dev/null)
+    zenity --notification --text="MoneroMixer exited successfully. Your data is secure." 
 }
 
 clean_all_exit() {
-    clean_all
-    #while ! [ -d scripts -a -d monero-software ]; do 
-    #    cd ../
-    #done
+    title
+    printf "${STD}Encrypting and shredding all data before exiting...\n"
+    clean_all | zprog "Encrypting and shredding all data before exiting..." \
+                      "Encrypting and shredding all data before exiting..."
     cd "$MMPATH"
-    printf "\n${GRN}Done. Your data is now secure.\n\n"
-    printf "${STD}TO START MONEROMIXER AGAIN RUN THIS COMMAND IN A NEW TERMINAL:
-${WBU}cd $MMPATH && ./start\n\n"
-    read discard
+    printf "${GRN}Done. Your data is now secure.\n\n"
+    printf "${WBU}HOW TO RESTART $MoneroMixer:\n
+${WBU}Method 1:${STD} Go to Applications > Internet > MoneroMixer.\n
+${WBU}Method 2:${STD} Go to your desktop and right click MoneroMixer.desktop. \nSelect 'Allow launching' then double click the MoneroMixer logo.\n 
+${WBU}Method 3:${STD} Paste your startup command into a new terminal then press ENTER.\n
+${WBU}Your startup command is:\n${GRN}cd \"$MMPATH\"; ./start\n\n"
+
+    if zenity --question --ellipsize --title="How to restart MoneroMixer" \
+           --text="Method 1: Go to Applications > Internet > MoneroMixer.\n
+Method 2: Go to your desktop and right click MoneroMixer.desktop. \nSelect 'Allow launching' then double click the MoneroMixer logo.\n 
+Method 3: Paste your startup command into a new terminal then press ENTER.\n
+Your startup command is:\ncd \"$MMPATH\"; ./start\n\n"\
+            --ok-label="Restart MoneroMixer now"\
+            --cancel-label="Quit and close windows" --icon-name=info;
+    then
+        ./start
+    fi
     exit
 }
 
 clean_all_no_exit() {
+    title
+    printf "${STD}Encrypting and shredding all data before exiting...\n"
     clean_all
     cd ../
     printf "\n${GRN}Done. Your data is now secure.\n"
