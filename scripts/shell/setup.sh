@@ -3,25 +3,43 @@ download_monero_wallet_cli(){
     declare uaList 
     readarray -n 7478 uaList <<< $(cat info/user-agents.txt)
     ua=$(echo "User-Agent: ${uaList[$(( ( RANDOM % 7047 )  + 1 ))]}" | tr -d "\n")
-    test -d monero-software || mkdir monero-software
+    [ -d monero-software ] || mkdir monero-software
     cd monero-software
 
-    torsocks wget https://dlsrc.getmonero.org/cli/monero-linux-x64-v0.15.0.0.tar.bz2 \
+    torsocks wget https://web.getmonero.org/downloads/hashes.txt \
+    --show-progress \
+    --secure-protocol="TLSv1_2" \
+    --user-agent "$ua" \
+    --max-redirect=0 | $(zenity --progress \
+                                    --title="Downloading SHA256 hashes from getmonero.org" \
+                                    --text="Downloading SHA256 hashes from getmonero.org to verify the\nauthenticity of your Monero software.
+\nPlease wait. MoneroMixer will start automatically once finished..." \
+                                    --pulsate --auto-close --auto-kill 2> /dev/null)
+    
+    read -r filename authentic_hash <<<$(grep "monero-linux-x64" hashes.txt | tr -d ,)
+    
+    torsocks wget https://dlsrc.getmonero.org/cli/${filename} \
     --show-progress \
     --secure-protocol="TLSv1_2" \
     --user-agent "$ua" \
     --max-redirect=0 -O linux64 | $(zenity --progress \
                                     --title="Downloading Monero software from getmonero.org" \
-                                    --text="Downloading Linux64 Monero wallet command line tools from getmonero.org
+                                    --text="Downloading Linux 64-bit Monero command line tools from getmonero.org
+\nPlease wait. MoneroMixer will start automatically once finished..." \
+                                    --pulsate --auto-close --auto-kill 2> /dev/null)
+    [ -e linux64 ] || failed_monero_wallet_cli
+
+    
+    read -ra cli_hash <<< $(openssl sha256 linux64)
+    if [ "${cli_hash[1]}" = "$authentic_hash" ]
+    then
+        zenity --notification --text "Successfully verified Monero binary hash\nYour Monero software is safe to use"   
+        unzip_monero_wallet_cli | $(zenity --progress \
+                                    --title="Extracting monero-wallet-cli from Monero binary" \
+                                    --text="Extracting monero-wallet-cli from $filename
 
 Please wait. MoneroMixer will start automatically once finished..." \
                                     --pulsate --auto-close --auto-kill 2> /dev/null)
-
-    [ -e linux64 ] || failed_monero_wallet_cli
-    read -ra cli_hash <<< $(openssl sha256 linux64)
-    if [ "${cli_hash[1]}" = "53d9da55137f83b1e7571aef090b0784d9f04a980115b5c391455374729393f3" ]
-    then 
-        unzip_monero_wallet_cli
     else
         if zenity --question --ellipsize --icon-name='dialog-warning' \
             --title="WARNING: The Monero software you downloaded may be NOT be authentic" \
@@ -31,7 +49,7 @@ The SHA256 hash of the linux64 Monero CLI tools just downloaded are:
 ${cli_hash[1]}
 
 Which is different from the SHA256 hash posted on getmonero.org:
-53d9da55137f83b1e7571aef090b0784d9f04a980115b5c391455374729393f3
+$authentic_hash
    
 You may be affected by an MITM (Man-in-the-middle) attack and should install the Monero software manually to ensure your security.
 
