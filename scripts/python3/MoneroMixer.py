@@ -10,6 +10,7 @@ REQUIRES_EXCHANGE = ("deposit", "withdraw", "rates", "status")
 REQUIRES_WALLET = ("balance", "address", "show_transfers", "make_xmr_qr")
 QRCODE = ("make_qr, print_qr, make_xmr_qr, print_xmr_qr")  
 
+
 class TorPydoHandler(object):
     """Parses and handles input from MoneroMixer.sh when MoneroMixer.py 
        is run inside a torsocksified shell. See mmutils.sh"""
@@ -47,8 +48,8 @@ class TorPydoHandler(object):
             elif self.inputDict.get("exchange") == "MorphToken":
                 self.exchange_handler = exchange.Morph(self.inputDict)
             elif self.inputDict.get("exchange") == "XMR.to":
-                self.exchange_handler = exchange.Xmrto(self.inputDict)
-    
+                self.exchange_handler = exchange.Xmrto(self.inputDict) 
+            
             
     def do_command(self):
         #Run command with its appropriate cmd_handler.
@@ -65,6 +66,7 @@ class TorPydoHandler(object):
             #Utility/helper function commands: See mmutils.py and excomp.py
             self.utility_cmd_handler()
     
+    
     #Exchange commands: See exchange.py
     def exchange_cmd_handler(self):
         if self.cmd == "deposit":
@@ -74,12 +76,13 @@ class TorPydoHandler(object):
             #Withdraw from Monero wallet
             self.exchange_handler.withdraw()
         elif self.cmd == "rates":
-            #Query exchange rates from the supplied exchange
+            #Query exchange rates from the specified exchange
             self.exchange_handler.get_rates()
         elif self.cmd == "status":
-             #Query order status from the supplied order id
+             #Query order status from the specified order id
             self.exchange_handler.get_order_status()
-                
+    
+    
     #Monero wallet commands: See wallet.py
     def wallet_cmd_handler(self):
         if self.cmd == "balance":
@@ -92,13 +95,13 @@ class TorPydoHandler(object):
             #Create a table displaying all XMR transfers.
             self.monero_wallet.show_transfers(self.fdlines)
 
+            
     #QRCode commands: See display.py         
     def qrcode_cmd_handler(self):
         #Read qr data from building QR
         qrdata = self.inputDict["qrdata"].split()
         #Read QRCode to format and print pretty
         qrlines = [line.replace("\n", "") for line in self.fdlines]
-
         
         if self.cmd == "make_xmr_qr":
             #Build a QRCode from the current XMR receiving address.
@@ -110,6 +113,7 @@ class TorPydoHandler(object):
             #Format, could and prettyprint the QRCode
             display.print_qr(self.inputDict["coin"], qrdata, qrlines)        
 
+            
     #Utility/helper function commands: See mmutils.py and excomp.py for compare
     def utility_cmd_handler(self):
         if self.cmd == "update":
