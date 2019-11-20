@@ -1,6 +1,6 @@
 wallet_cmd(){
     (torsocks ../../monero-software/monero-wallet-cli \
-              --no-dns --log-level 0 \
+              --no-dns --log-file /dev/null \
               --daemon-address $daemon \
               --command $1 <<<"$name
 $password
