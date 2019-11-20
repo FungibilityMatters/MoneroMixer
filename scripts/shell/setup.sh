@@ -11,11 +11,12 @@ download_monero_wallet_cli(){
     --secure-protocol="TLSv1_2" \
     --user-agent "$ua" \
     --max-redirect=0 | $(zenity --progress \
-                                    --title="Downloading SHA256 hashes from getmonero.org" \
-                                    --text="Downloading SHA256 hashes from getmonero.org to verify the\nauthenticity of your Monero software.
+                         --title="Downloading SHA256 hashes from getmonero.org" \
+                         --text="Downloading SHA256 hashes from getmonero.org to verify the\nauthenticity of your Monero software.
 \nPlease wait. MoneroMixer will start automatically once finished..." \
-                                    --pulsate --auto-close --auto-kill 2> /dev/null)
-    
+                         --pulsate --auto-close --auto-kill 2> /dev/null)
+    chmod 400 hashes.txt
+
     read -r filename authentic_hash <<<$(grep "monero-linux-x64" hashes.txt | tr -d ,)
     
     torsocks wget https://dlsrc.getmonero.org/cli/${filename} \
@@ -68,7 +69,7 @@ The potentially compromised software will be destroyed unless you select continu
 
 unzip_monero_wallet_cli(){
     tar -xf linux64
-    mv monero-x86_64-linux-gnu-v0.15.0.0/monero-wallet-cli monero-wallet-cli
+    mv */monero-wallet-cli monero-wallet-cli
     chmod +x monero-wallet-cli
 }
 
@@ -151,10 +152,23 @@ move_setup(){
 
 
 file_setup() {
+    shell=( "welcome" "mmutils" "error" "settings" "wallet" "wallet_gen" \
+            "main_menu" "exchange" "exchange_menus" "update" "help" "donate" )
+    python=( "display" "exchange" "excomp" "mmutils" "MoneroMixer" "wallet" )
+    
+    for shfile in "${shell[@]}"; do
+        chmod 400 "scripts/shell/${shfile}.sh"
+    done
+
+    for pyfile in "${python[@]}"; do
+        chmod 400 "scripts/python3/${pyfile}.py"
+    done
+
+    chmod 500 scripts/shell/MoneroMixer.sh
+    
     rm -rf .git _config.yml
     mv README.md info/README.md
     mv LICENSE info/LICENSE
-    chmod +x scripts/shell/MoneroMixer.sh
 }
 
 make_launchers() {
@@ -184,7 +198,7 @@ make_launchers() {
 #######################################################################################
 
 ${terminal}${term_args}${mmscript}" > start
-    chmod +x start
+    chmod 500 start
 
     echo "[Desktop Entry]
 Version=1.2
@@ -198,7 +212,7 @@ Icon=${MMPATH}/icons/MMICON.png
 Categories=Application;Network;
 Path=${MMPATH}
 Exec=${MMPATH}/start" > MoneroMixer.desktop
-    chmod +x MoneroMixer.desktop
+    chmod 555 MoneroMixer.desktop
     xdg-desktop-icon install MoneroMixer.desktop --novendor
     xdg-desktop-menu install MoneroMixer.desktop --novendor
     mv MoneroMixer.desktop icons/MoneroMixer.desktop
