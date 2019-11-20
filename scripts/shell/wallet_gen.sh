@@ -7,7 +7,7 @@ wallet_set_login(){
                                --title="$2" --text="$3" \
                                --add-entry="Wallet name:" \
                                --add-password="Password:"  \
-                               --ok-label="$4" 200 2> /dev/null)
+                               --ok-label="$4" 2> /dev/null)
     unset_IFS
 
     [ -z "$name$password" ] && clean_all_exit
