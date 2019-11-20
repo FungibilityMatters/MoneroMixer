@@ -12,7 +12,7 @@ QRCODE = ("make_qr, print_qr, make_xmr_qr, print_xmr_qr")
 
 
 class TorPydoHandler(object):
-    """Parses and handles input from MoneroMixer.sh when MoneroMixer.py 
+    """Parse and handle input from MoneroMixer.sh when MoneroMixer.py 
        is run inside a torsocksified shell. See mmutils.sh"""
 
     def __init__(self, args):
