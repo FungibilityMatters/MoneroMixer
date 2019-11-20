@@ -7,7 +7,7 @@ wallet_set_login(){
                                --title="$2" --text="$3" \
                                --add-entry="Wallet name:" \
                                --add-password="Password:"  \
-                               --timeout 200 2> /dev/null)
+                               --ok-label="$4" 200 2> /dev/null)
     unset_IFS
 
     [ -z "$name$password" ] && clean_all_exit
@@ -26,7 +26,8 @@ wallet_set_login(){
 gen_wallet_and_seed_file() {
     wallet_set_login "To begin enter a ${YAY}name${STD} and ${YAY}password${STD} for your new Monero wallet. [${ERR}BOTH 1 WORD MAX${STD}]\n" \
     "Create a new Monero wallet" \
-    "Set a name and password for your new Monero Wallet"
+    "Set a name and password for your new Monero Wallet"\
+    "Create wallet"
     
     
     [ -e ../../settings ] && mv ../../settings settings || echo " "
@@ -114,7 +115,8 @@ wallet_restore_from_seed(){
 \n${WBU}You will need to enter your 25 word mnemonic seed in the next step." \
     "Restore a wallet from seed"\
     "Enter a new name and password the Monero Wallet you would like to restore.
-\nYou will need to enter your 25 word mnemonic seed in the next step."
+\nYou will need to enter your 25 word mnemonic seed in the next step." \
+    "Continue"
     
     use_default_settings
     write_settings
