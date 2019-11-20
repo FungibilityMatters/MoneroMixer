@@ -1,11 +1,12 @@
 #!/bin/bash
 download_monero_wallet_cli(){
-    declare uaList 
-    readarray -n 7478 uaList <<< $(cat info/user-agents.txt)
-    ua=$(echo "User-Agent: ${uaList[$(( ( RANDOM % 7047 )  + 1 ))]}" | tr -d "\n")
     [ -d monero-software ] || mkdir monero-software
     cd monero-software
+    
+    declare uaList 
+    readarray -n 7478 uaList < ../info/user-agents.txt    
 
+    ua=$(echo "User-Agent: ${uaList[$(( ( RANDOM % 7047 )  + 1 ))]}" | tr -d "\n")
     torsocks wget https://web.getmonero.org/downloads/hashes.txt \
     --show-progress \
     --secure-protocol="TLSv1_2" \
@@ -16,9 +17,9 @@ download_monero_wallet_cli(){
 \nPlease wait. MoneroMixer will start automatically once finished..." \
                                     --pulsate --auto-close --auto-kill 2> /dev/null)
     chmod 400 hashes.txt
-
     read -r filename authentic_hash <<<$(grep "monero-linux-x64" hashes.txt | tr -d ,)
     
+    ua=$(echo "User-Agent: ${uaList[$(( ( RANDOM % 7047 )  + 1 ))]}" | tr -d "\n")
     torsocks wget https://dlsrc.getmonero.org/cli/${filename} \
     --show-progress \
     --secure-protocol="TLSv1_2" \
