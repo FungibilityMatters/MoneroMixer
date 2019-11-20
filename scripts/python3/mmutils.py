@@ -141,7 +141,10 @@ class Coinquery(object):
        
         tickerList = sorted(coinDict.keys())
         for coin in popularList:
-            tickerList.remove(coin)
+            if coin in tickerList:
+                tickerList.remove(coin)
+            else:
+                popularList.remove(coin)
     
         tickerList = popularList[:] + tickerList 
     except:
